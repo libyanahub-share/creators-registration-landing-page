@@ -1,0 +1,83 @@
+<div id="banner-section" class="relative gradient-primary py-24 lg:py-32 overflow-hidden">
+  <!-- Background Decorations -->
+  <div class="absolute inset-0 w-full h-full overflow-hidden">
+    <svg class="absolute top-0 right-0 w-[1200px] h-[1500px] scale-50 origin-top-right opacity-15 fill-secondary">
+      <use href="/images/saas/deco-bg-right.svg#main"></use>
+    </svg>
+    <svg class="absolute top-0 left-0 w-[1200px] h-[1500px] scale-50 origin-top-left opacity-15 fill-secondary">
+      <use href="/images/saas/deco-bg-left.svg#main"></use>
+    </svg>
+  </div>
+
+  <!-- Video Dialog -->
+  <div *ngIf="showVideoDialog" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" (click)="closeVideoDialog()">
+    <div class="bg-white rounded-lg p-6 max-w-3xl w-full mx-4" (click)="$event.stopPropagation()">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-foreground">شاهد الفيديو التعريفي</h2>
+        <button (click)="closeVideoDialog()" class="text-muted-foreground hover:text-foreground transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="aspect-video bg-muted rounded-lg">
+        <iframe
+          class="w-full h-full rounded-lg"
+          src="https://www.youtube.com/embed/KxZAdEGpYAw"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+      <!-- Text Content -->
+      <div class="max-w-3xl text-center lg:text-right">
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
+          <span>ابدأ رحلتك </span>
+          <strong>كمبدع محترف</strong>
+        </h1>
+        <p class="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
+          انضم إلى آلاف المبدعين الذين يشاركون خبراتهم ويحققون دخلاً مستداماً من خلال منصتنا المتطورة
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
+          <button
+            (click)="openVideoDialog()"
+            class="flex items-center justify-center gap-2 text-white hover:opacity-90 transition-opacity py-3 px-6 text-lg">
+            <span class="w-10 h-10 rounded-full bg-primary flex items-center justify-center transition-transform hover:scale-110">
+              <svg class="w-6 h-6 text-white mr-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </span>
+            <span>شاهد الفيديو التعريفي</span>
+          </button>
+          <a
+            href="/register"
+            class="inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white bg-secondary hover:bg-secondary/90 rounded-lg transition-all shadow-elevated hover:shadow-lg">
+            ابدأ الآن مجاناً
+          </a>
+        </div>
+      </div>
+
+      <!-- Illustration -->
+      <div class="hidden lg:block max-w-xl">
+        <img src="/images/saas/desktop_illustration.png" alt="illustration" class="w-full h-auto">
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave Decoration -->
+  <div class="absolute bottom-[-35px] lg:bottom-[-10px] left-0 w-full h-28 pointer-events-none">
+    <div *ngIf="!hide" class="absolute inset-0">
+      <div class="wave-animation absolute inset-0 bg-[url('/images/saas/deco-wave-light.png')] bg-repeat-x opacity-20"
+           style="background-size: 50% 100px; transform: scale(2.5, 1);"></div>
+      <div class="wave-animation absolute inset-0 bg-[url('/images/saas/deco-wave-light.png')] bg-repeat-x opacity-20"
+           style="background-size: 50% 120px; transform: scale(2.5, 1); animation-duration: 20s;"></div>
+    </div>
+    <div class="absolute inset-0 bg-[url('/images/saas/deco-wave-light.png')] bg-repeat-x"
+         style="background-size: 51% 100px; background-position: 397px 0; transform: scale(2, 1);"></div>
+  </div>
+</div>

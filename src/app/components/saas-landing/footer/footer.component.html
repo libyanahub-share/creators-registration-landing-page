@@ -1,0 +1,102 @@
+<footer class="relative bg-gradient-primary text-white overflow-hidden">
+  <!-- Decorative SVG Background -->
+  <div class="absolute inset-0 opacity-10">
+    <svg class="absolute bottom-0 right-0 w-full h-auto" viewBox="0 0 1440 320">
+      <use href="/images/saas/footer-deco-light.svg#main"></use>
+    </svg>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <!-- Main Footer Content -->
+    <div class="py-12 lg:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <!-- Brand Section -->
+        <div class="lg:col-span-2">
+          <a href="/" class="inline-block mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                </svg>
+              </div>
+              <span class="text-2xl font-bold">منصة المبدعين</span>
+            </div>
+          </a>
+          <p class="text-white/80 mb-6 leading-relaxed">
+            منصتك المتكاملة لإنشاء ومشاركة الدورات التعليمية وتحقيق دخل مستدام من خبراتك ومعرفتك
+          </p>
+
+          <!-- Social Links -->
+          <div class="flex gap-3">
+            <a
+              *ngFor="let social of socialLinks"
+              [href]="social.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              [title]="social.name"
+              class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="social.icon"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Footer Links Sections -->
+        <div *ngFor="let section of footerSections" class="lg:col-span-1">
+          <h3 class="text-lg font-bold mb-4">{{ section.title }}</h3>
+          <ul class="space-y-3">
+            <li *ngFor="let link of section.links">
+              <a
+                [href]="link.url"
+                class="text-white/80 hover:text-white transition-colors inline-block">
+                {{ link.title }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="border-t border-white/20 py-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <h3 class="text-2xl font-bold mb-3">اشترك في نشرتنا البريدية</h3>
+        <p class="text-white/80 mb-6">احصل على آخر التحديثات والنصائح والعروض الحصرية</p>
+        <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="أدخل بريدك الإلكتروني"
+            class="flex-1 px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50">
+          <button
+            type="button"
+            class="px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-white/90 transition-all whitespace-nowrap">
+            اشترك الآن
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-white/20 py-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/80">
+        <p>
+          &copy; {{ currentYear }} منصة المبدعين. جميع الحقوق محفوظة.
+        </p>
+        <div class="flex items-center gap-6">
+          <a href="/terms" class="hover:text-white transition-colors">الشروط والأحكام</a>
+          <span class="text-white/40">•</span>
+          <a href="/privacy" class="hover:text-white transition-colors">سياسة الخصوصية</a>
+          <span class="text-white/40">•</span>
+          <a href="/cookies" class="hover:text-white transition-colors">سياسة الكوكيز</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave Decoration -->
+  <div class="absolute top-0 left-0 w-full h-20 pointer-events-none">
+    <div class="absolute inset-0 bg-[url('/images/saas/deco-wave-light.png')] bg-repeat-x opacity-30"
+         style="background-size: 51% 80px; background-position: 0 0; transform: scale(2, 1) rotate(180deg);"></div>
+  </div>
+</footer>

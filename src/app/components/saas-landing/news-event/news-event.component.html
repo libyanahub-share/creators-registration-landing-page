@@ -1,0 +1,75 @@
+<section id="news" class="py-16 lg:py-24 bg-gradient-subtle">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+      <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-4">
+        آخر
+        <span class="text-primary">الأخبار والفعاليات</span>
+      </h2>
+      <p class="text-lg text-muted-foreground">
+        ابق على اطلاع بآخر التحديثات والفعاليات والمقالات التي تهم المبدعين
+      </p>
+    </div>
+
+    <!-- News Carousel -->
+    <div class="max-w-7xl mx-auto news-slider">
+      <ngx-slick-carousel class="carousel" [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let item of news" class="px-3">
+          <a [href]="item.link"
+             class="block bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 h-full">
+
+            <!-- Image -->
+            <div class="relative h-48 overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+              <img [src]="item.image"
+                   [alt]="item.title"
+                   class="w-full h-full object-cover">
+              <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">
+                {{ item.category }}
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+              <!-- Date -->
+              <div class="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span>{{ item.date }}</span>
+              </div>
+
+              <!-- Title -->
+              <h3 class="text-xl font-bold text-foreground mb-3 line-clamp-2">
+                {{ item.title }}
+              </h3>
+
+              <!-- Excerpt -->
+              <p class="text-muted-foreground leading-relaxed mb-4 line-clamp-3">
+                {{ item.excerpt }}
+              </p>
+
+              <!-- Read More -->
+              <div class="flex items-center gap-2 text-primary font-semibold">
+                <span>اقرأ المزيد</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-12">
+      <a href="/news"
+         class="inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white bg-primary hover:bg-primary/90 rounded-lg transition-all shadow-elevated hover:shadow-lg">
+        عرض جميع الأخبار
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

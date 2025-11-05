@@ -1,0 +1,71 @@
+<section id="faq" class="py-16 lg:py-24 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <!-- Left Side - Image and Title -->
+      <div class="lg:sticky lg:top-24">
+        <div class="mb-8">
+          <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-4">
+            الأسئلة
+            <span class="text-primary">الشائعة</span>
+          </h2>
+          <p class="text-lg text-muted-foreground mb-6">
+            إجابات على أكثر الأسئلة شيوعاً حول منصتنا وخدماتنا
+          </p>
+        </div>
+        <div class="hidden lg:block">
+          <img src="/images/saas/faq.png" alt="FAQ" class="w-full max-w-md mx-auto">
+        </div>
+      </div>
+
+      <!-- Right Side - FAQ Accordion -->
+      <div class="space-y-4">
+        <div *ngFor="let faq of faqs; let i = index"
+             class="bg-gradient-subtle rounded-xl overflow-hidden shadow-soft transition-all duration-300"
+             [class.shadow-elevated]="faq.isOpen">
+
+          <!-- Question -->
+          <button
+            (click)="toggleFaq(i)"
+            class="w-full text-right p-6 flex items-center justify-between gap-4 hover:bg-white/50 transition-colors">
+            <span class="text-lg font-bold text-foreground">{{ faq.question }}</span>
+            <svg
+              class="w-6 h-6 text-primary flex-shrink-0 transition-transform duration-300"
+              [class.rotate-180]="faq.isOpen"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          <!-- Answer -->
+          <div
+            class="transition-all duration-300 overflow-hidden"
+            [class.max-h-0]="!faq.isOpen"
+            [class.max-h-96]="faq.isOpen">
+            <div class="px-6 pb-6">
+              <p class="text-muted-foreground leading-relaxed">{{ faq.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="text-center mt-12 lg:mt-16 p-8 bg-gradient-subtle rounded-2xl">
+      <h3 class="text-2xl font-bold text-foreground mb-4">
+        لديك سؤال آخر؟
+      </h3>
+      <p class="text-muted-foreground mb-6">
+        فريقنا جاهز للإجابة على جميع استفساراتك
+      </p>
+      <a href="/contact"
+         class="inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white bg-primary hover:bg-primary/90 rounded-lg transition-all shadow-elevated hover:shadow-lg">
+        تواصل معنا
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
