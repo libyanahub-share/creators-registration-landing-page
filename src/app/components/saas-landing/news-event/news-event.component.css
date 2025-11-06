@@ -1,0 +1,35 @@
+::ng-deep .news-slider .slick-dots {
+  bottom: -40px;
+}
+
+::ng-deep .news-slider .slick-dots li button:before {
+  font-size: 12px;
+  color: hsl(262, 83%, 58%);
+}
+
+::ng-deep .news-slider .slick-dots li.slick-active button:before {
+  color: hsl(262, 83%, 58%);
+}
+
+::ng-deep .news-slider .slick-prev,
+::ng-deep .news-slider .slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+}
+
+::ng-deep .news-slider .slick-prev {
+  right: -20px;
+  left: auto;
+}
+
+::ng-deep .news-slider .slick-next {
+  left: -20px;
+  right: auto;
+}
+
+::ng-deep .news-slider .slick-prev:before,
+::ng-deep .news-slider .slick-next:before {
+  font-size: 40px;
+  color: hsl(262, 83%, 58%);
+}

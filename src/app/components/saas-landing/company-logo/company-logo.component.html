@@ -1,0 +1,10 @@
+<div class="py-12 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap items-center justify-center gap-8 lg:gap-12 opacity-60 grayscale hover:grayscale-0 transition-all">
+      <img *ngFor="let logo of logos; let i = index"
+           [src]="logo"
+           [alt]="'شريك ' + (i + 1)"
+           class="h-12 lg:h-16 w-auto object-contain hover:scale-110 transition-transform">
+    </div>
+  </div>
+</div>

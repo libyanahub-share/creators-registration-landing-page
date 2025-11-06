@@ -1,0 +1,47 @@
+<div
+  *ngIf="showNotification"
+  class="fixed bottom-8 right-8 z-50 max-w-md animate-slide-up">
+
+  <div class="bg-white rounded-2xl shadow-elevated p-6 border-r-4 border-primary">
+    <!-- Close Button -->
+    <button
+      (click)="closeNotification()"
+      class="absolute top-4 left-4 text-muted-foreground hover:text-foreground transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Content -->
+    <div class="flex items-start gap-4 pl-8">
+      <!-- Icon -->
+      <div class="flex-shrink-0">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="flex-1">
+        <h3 class="text-lg font-bold text-foreground mb-2">
+          عرض خاص لفترة محدودة!
+        </h3>
+        <p class="text-muted-foreground mb-4 leading-relaxed">
+          احصل على خصم 50% على الخطة الاحترافية عند التسجيل خلال الـ 48 ساعة القادمة
+        </p>
+
+        <!-- CTA -->
+        <a
+          href="/register?promo=SPECIAL50"
+          class="inline-flex items-center justify-center px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all font-semibold text-sm">
+          احصل على الخصم الآن
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
