@@ -174,9 +174,9 @@ export class AuthComponent {
         if (response.success && response.token) {
           // Store token
           this.authService.setAuthToken(response.token, response.expiresAt);
-          
-          // Redirect to intended page or home
-          const redirectUrl = sessionStorage.getItem('redirectUrl') || '/home';
+
+          // Redirect to intended page or landing
+          const redirectUrl = sessionStorage.getItem('redirectUrl') || '/';
           sessionStorage.removeItem('redirectUrl');
           this.router.navigate([redirectUrl]);
         }

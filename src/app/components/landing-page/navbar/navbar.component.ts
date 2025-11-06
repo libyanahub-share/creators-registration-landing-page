@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { translations } from '../../../translations';
 
 @Component({
@@ -12,6 +13,8 @@ import { translations } from '../../../translations';
 export class NavbarComponent implements OnInit {
   isFixed = false;
   translations = translations;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Set Arabic and RTL permanently
@@ -33,5 +36,9 @@ export class NavbarComponent implements OnInit {
     htmlElement.setAttribute('dir', 'rtl');
     htmlElement.setAttribute('lang', 'ar');
     document.body.classList.add('rtl');
+  }
+
+  navigateToRegister(): void {
+    this.router.navigate(['/register']);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { SafePipe } from './safe.pipe';
 import { translations } from '../../../translations';
 
@@ -26,6 +27,8 @@ export class HeroComponent implements OnInit {
   // Current language (Arabic only)
   currentLanguage: 'ar' = 'ar';
   translations = translations;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Initial check for wave decorations
@@ -71,5 +74,10 @@ export class HeroComponent implements OnInit {
     if ((event.target as HTMLElement).classList.contains('video-popup-overlay')) {
       this.closeVideoPopup();
     }
+  }
+
+  // Navigate to registration page
+  navigateToRegister(): void {
+    this.router.navigate(['/register']);
   }
 }
