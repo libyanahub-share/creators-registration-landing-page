@@ -1,0 +1,69 @@
+<div class="footer-deco">
+  <!-- SVG Decorations -->
+  <!-- <div class="decoration">
+    <svg class="left-deco">
+      <use href="assets/deco-bg-left.svg#main"></use>
+    </svg>
+    <svg class="right-deco">
+      <use href="assets/deco-bg-right.svg#main"></use>
+    </svg>
+  </div> -->
+
+  <!-- Call to Action Section -->
+  <!-- <div class="action">
+    <h4 class="title2">What are you waiting for?</h4>
+    <button class="large-button accent-button">
+      GET STARTED
+    </button>
+  </div> -->
+
+  <!-- Footer Content -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Logo and Copyright Section -->
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon">
+              <span class="logo-text">لي</span>
+            </div>
+            <h6>{{ brand.projectName }}</h6>
+          </div>
+          <p class="copyright">
+            {{ brand.footerText }}
+          </p>
+        </div>
+
+        <!-- Contact Information Section -->
+        <div class="footer-contact">
+          <div class="contact-line">
+            <span class="contact-item">
+              <strong>البريد الإلكتروني:</strong> {{ contactInfo.email }}
+            </span>
+            <span class="contact-item">
+              <strong>العنوان:</strong> {{ contactInfo.address }}
+            </span>
+            <span class="contact-item">
+              <strong>الهاتف:</strong> {{ contactInfo.phone }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="footer-social">
+          <h6 class="title">تواصل معنا</h6>
+          <div class="socmed">
+            <a
+              *ngFor="let social of socialLinks"
+              [href]="social.link"
+              [attr.aria-label]="social.label"
+              class="social-button"
+              target="_blank">
+              <i [class]="social.icon"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

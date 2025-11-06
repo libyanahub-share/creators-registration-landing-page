@@ -3,21 +3,29 @@ import { authGuard } from './guards/auth.guard';
 import { AuthComponent } from './components/auth/auth.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { SaasLandingPageComponent } from './components/saas-landing/saas-landing-page/saas-landing-page.component';
+import { LandingComponent } from './components/landing-page/landing/landing.component';
 
 export const routes: Routes = [
-  // Default redirect to home (will be intercepted by guard if not authenticated)
+  // Default home page - PUBLIC (no auth required)
   {
     path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    component: LandingComponent,
+    title: 'ليبيانا هب - منصة المبدعين'
   },
 
-  // New SaaS Landing Page - PUBLIC (no auth required)
+  // Landing page alias
   {
     path: 'landing',
-    component: SaasLandingPageComponent,
+    component: LandingComponent,
     title: 'ليبيانا هب - منصة المبدعين'
+  },
+
+  // Old home page - PROTECTED (will be deleted later)
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [authGuard],
+    title: 'الصفحة الرئيسية - ليبيانا هب'
   },
 
   // Auth page - PUBLIC (no guard)
@@ -25,14 +33,6 @@ export const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
     title: 'تسجيل الدخول - ليبيانا هب'
-  },
-
-  // Home/Landing page - PROTECTED
-  {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [authGuard],
-    title: 'الصفحة الرئيسية - ليبيانا هب'
   },
 
   // Registration page - PROTECTED
@@ -46,6 +46,6 @@ export const routes: Routes = [
   // Wildcard - redirect to home
   {
     path: '**',
-    redirectTo: '/landing'
+    redirectTo: ''
   }
 ];

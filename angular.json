@@ -8,7 +8,7 @@
       "flat": false,
       "skipTests": true,
       "standalone": true,
-      "style": "css"
+      "style": "scss"
     },
     "@schematics/angular:service": {
       "type": "service",
@@ -43,7 +43,7 @@
             "styles": [
               "node_modules/slick-carousel/slick/slick.css",
               "node_modules/slick-carousel/slick/slick-theme.css",
-              "src/styles.css"
+              "src/styles.scss"
             ]
           },
           "configurations": {
@@ -102,7 +102,7 @@
             "styles": [
               "node_modules/slick-carousel/slick/slick.css",
               "node_modules/slick-carousel/slick/slick-theme.css",
-              "src/styles.css"
+              "src/styles.scss"
             ]
           }
         }
