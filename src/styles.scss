@@ -30,7 +30,7 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Tajawal', sans-serif;
@@ -123,5 +123,59 @@
 
   .wave-animation {
     animation: wave-animation 25s linear infinite;
+  }
+}
+
+/* Landing Page Component Styles - Override Tailwind where needed */
+.landing-container {
+  min-height: 100vh;
+  background: #fff;
+  overflow-x: hidden;
+
+  /* Reset Tailwind for landing page components */
+  * {
+    border-width: 0;
+    border-style: solid;
+  }
+}
+
+/* RTL Support for Landing Page */
+[dir="rtl"] .landing-container,
+body.rtl .landing-container {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Ensure component styles aren't overridden by Tailwind */
+app-landing,
+app-navbar,
+app-hero,
+app-feature,
+app-faq,
+app-footer {
+  display: block;
+}
+
+/* Protect hero section from Tailwind resets */
+// app-hero,
+// app-hero * {
+//   all: revert;
+// }
+
+// app-hero {
+//   display: block;
+// }
+
+/* Container utilities */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
   }
 }

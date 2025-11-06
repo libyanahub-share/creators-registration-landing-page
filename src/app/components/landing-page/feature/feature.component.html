@@ -1,0 +1,83 @@
+<div class="feature-root">
+  <!-- Background Decoration -->
+  <div class="decoration">
+    <svg class="wave">
+      <use href="assets/deco-bg.svg#main"></use>
+    </svg>
+  </div>
+
+  <div class="container" [class.desktop]="isDesktop">
+    <!-- Feature Section 3 - Tabbed Content -->
+    <div class="feature-item feature-last section-3">
+      <h2 class="title text-center">
+        {{ t('featureTitle') }}
+        <strong>{{ t('featureTitleBold') }}</strong>
+      </h2>
+
+      <div class="tab-section">
+        <div class="tab-grid">
+          <div class="tab-spacer" *ngIf="!isMobile"></div>
+          <div class="tab-content-wrapper">
+            <!-- Tab Navigation -->
+            <div class="tabs">
+              <button
+                class="tab-label"
+                [class.selected]="selectedTab === 0"
+                (click)="changeTab(0)">
+                {{ t('featureTab1') }}
+              </button>
+              <button
+                class="tab-label"
+                [class.selected]="selectedTab === 1"
+                (click)="changeTab(1)">
+                {{ t('featureTab2') }}
+              </button>
+              <button
+                class="tab-label"
+                [class.selected]="selectedTab === 2"
+                (click)="changeTab(2)">
+                {{ t('featureTab3') }}
+              </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-panel">
+              <div *ngIf="selectedTab === 0" class="tab-content">
+                <p class="subtitle text-center">
+                  {{ t('featureTab1Text') }}
+                </p>
+                <div class="illustration-center">
+                  <figure class="figure screen-figure">
+                    <img src="assets/course-interface.png" alt="{{ t('featureTab1') }}" />
+                  </figure>
+                </div>
+              </div>
+
+              <div *ngIf="selectedTab === 1" class="tab-content">
+                <p class="subtitle text-center">
+                  {{ t('featureTab2Text') }}
+                </p>
+                <div class="illustration-center">
+                  <figure class="figure screen-figure">
+                    <img src="/assets/course-interface.png" alt="{{ t('featureTab2') }}" />
+                  </figure>
+                </div>
+              </div>
+
+              <div *ngIf="selectedTab === 2" class="tab-content">
+                <p class="subtitle text-center">
+                  {{ t('featureTab3Text') }}
+                </p>
+                <div class="illustration-center">
+                  <figure class="figure screen-figure">
+                    <img src="/assets/course-interface.png" alt="{{ t('featureTab3') }}" />
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

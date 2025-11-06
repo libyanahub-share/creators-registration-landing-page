@@ -1,0 +1,56 @@
+<div class="faq-root">
+  <div class="container">
+    <div class="grid-container">
+      <div class="grid-item-left">
+        <div class="title-wrapper" [class.center]="isMobile">
+          <h2 class="section-title">
+            <strong>{{ t('faqTitle') }}</strong>
+          </h2>
+        </div>
+        <p class="text subtitle" [class.center]="isMobile">
+          {{ t('faqSubtitle') }}
+        </p>
+        @if (!isMobile) {
+          <div class="illustration">
+            <div class="parallax-medium"></div>
+            <img src="assets/faq.png" alt="illustration" />
+          </div>
+        }
+      </div>
+      <div class="grid-item-right">
+        <div class="accordion">
+          @for (item of faqs; track $index) {
+            <div class="item">
+              <div class="paper" [class.expanded]="isExpanded($index)">
+                <div class="accordion-summary" (click)="handleChange($index)">
+                  <div class="content" [class.expanded]="isExpanded($index)">
+                    <h3 class="heading">{{ item.q }}</h3>
+                    <svg
+                      class="arrow-icon"
+                      [class.expanded]="isExpanded($index)"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div class="accordion-details" [class.expanded]="isExpanded($index)">
+                  <div class="detail">
+                    <p>{{ item.a }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<nav class="navbar" [class.fixed]="isFixed">
+  <div class="navbar-container">
+    <nav class="nav-left">
+      <div class="logo">
+        <a href="#home">
+          <div class="logo-icon">
+            <span class="logo-text">لي</span>
+          </div>
+          <span class="logo-name" [class.hide-on-fixed]="isFixed">ليبيانا هب</span>
+        </a>
+      </div>
+    </nav>
+
+    <nav class="nav-right">
+      <button class="btn-register">{{ t('navRegister') }}</button>
+    </nav>
+  </div>
+</nav>
