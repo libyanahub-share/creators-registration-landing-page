@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegistrationService } from '../../services/registration.service';
 
 export interface RegistrationData {
   // Step 1: Personal Info
@@ -75,10 +76,14 @@ export class RegistrationComponent implements OnInit {
   
   isSubmitting = false;
   showSuccessMessage = false;
-  
+  errorMessage = '';
+
   private readonly STORAGE_KEY = 'libyana_hub_registration_draft';
-  
-  constructor(public router: Router) {}
+
+  constructor(
+    public router: Router,
+    private registrationService: RegistrationService
+  ) {}
   
   ngOnInit(): void {
     this.loadDraft();
@@ -244,31 +249,53 @@ export class RegistrationComponent implements OnInit {
   /**
    * Submit registration
    */
-  async submitRegistration(): Promise<void> {
+  submitRegistration(): void {
     if (!this.validateCurrentStep()) {
       return;
     }
-    
+
     this.isSubmitting = true;
-    
-    // TODO: Replace with actual API call
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // For now, just show success message
-    this.isSubmitting = false;
-    this.showSuccessMessage = true;
-    
-    // Clear draft
-    this.clearDraft();
-    
-    // Scroll to top to show success message
-    this.scrollToTop();
-    
-    console.log('Registration data:', this.formData);
-    
-    // TODO: Send SMS confirmation
-    // TODO: Redirect after success or show next steps
+    this.errorMessage = '';
+
+    // Prepare data for API
+    const registrationData = {
+      fullName: this.formData.fullName,
+      email: this.formData.email,
+      phone: this.formData.phone,
+      expertise: this.formData.expertise,
+      teachingMethods: this.formData.teachingMethods,
+      bio: this.formData.bio,
+      introVideo: this.formData.introVideo
+    };
+
+    // Call registration service
+    this.registrationService.submitRegistration(registrationData).subscribe({
+      next: (response) => {
+        this.isSubmitting = false;
+
+        if (response.success) {
+          // Show success message
+          this.showSuccessMessage = true;
+
+          // Clear draft
+          this.clearDraft();
+
+          // Scroll to top to show success message
+          this.scrollToTop();
+
+          console.log('Registration successful:', response.data);
+
+          // TODO: Send SMS confirmation
+          // TODO: Redirect after success or show next steps
+        }
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        this.errorMessage = error.message || 'حدث خطأ أثناء إرسال البيانات، الرجاء المحاولة مرة أخرى';
+        this.scrollToTop();
+        console.error('Registration error:', error);
+      }
+    });
   }
   
   /**
