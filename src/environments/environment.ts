@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.libyanahub.com/api', // TODO: Update with actual production URL
+  apiUrl: 'https://libyanahub.ly/api',
   apiEndpoints: {
     generateCode: '/generate-code',
     verifyCode: '/verify-code',
