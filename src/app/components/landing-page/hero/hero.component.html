@@ -14,14 +14,10 @@
         </button>
       </div>
       <div class="video-popup-body">
-        <iframe
-          [src]="youtubeEmbedUrl | safe:'resourceUrl'"
-          width="640"
-          height="360"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
+        <video controls autoplay class="w-full h-full" style="max-width: 640px; max-height: 360px;">
+          <source src="/assets/creator-intro.mp4" type="video/mp4" />
+          متصفحك لا يدعم تشغيل الفيديو
+        </video>
       </div>
     </div>
   </div>
@@ -57,15 +53,6 @@
       </svg>
     </button>
   </div>
-
-  <!-- BUY NOW Button -->
-  <a href="#pricing" class="buy-now-btn">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <circle cx="12" cy="12" r="10"/>
-      <path d="M8 12h8M12 8v8" stroke="white" stroke-width="2"/>
-    </svg>
-    {{ t('heroBuyNow') }}
-  </a>
 
   <!-- Main Hero Content -->
   <div class="hero-container">

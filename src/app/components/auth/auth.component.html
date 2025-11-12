@@ -31,31 +31,42 @@
       <!-- OTP Input -->
       <div class="mb-6">
         <label class="block text-right text-sm font-medium text-foreground mb-4">
-          كود الدخول (4 أرقام)
+          كود الدخول
         </label>
-        
-        <div class="flex gap-3 justify-center" dir="ltr">
-          <div *ngFor="let digit of codeDigits; let i = index" class="flex-1 max-w-[70px]">
-            <input
-              [id]="'digit-' + i"
-              type="text"
-              inputmode="numeric"
-              pattern="[0-9]"
-              maxlength="1"
-              [value]="codeDigits[i]"
-              (keydown)="onKeyDown($event, i)"
-              (paste)="i === 0 ? onPaste($event) : null"
-              [disabled]="isLoading"
-              autocomplete="off"
-              class="w-full h-16 text-center text-2xl font-bold border-2 rounded-xl
-                     focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
-                     transition-all duration-200
-                     {{errorMessage ? 'border-red-500' : 'border-border'}}
-                     {{isLoading ? 'bg-muted cursor-not-allowed' : 'bg-background'}}"
-              [class.animate-shake]="errorMessage"
-            />
-          </div>
+
+        <div class="flex justify-center" dir="ltr">
+          <input
+            id="code-input"
+            type="text"
+            inputmode="numeric"
+            [(ngModel)]="code"
+            [disabled]="isLoading"
+            autocomplete="off"
+            class="w-full h-16 text-center text-2xl font-bold border-2 rounded-xl
+                   focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+                   transition-all duration-200
+                   {{errorMessage ? 'border-red-500' : 'border-border'}}
+                   {{isLoading ? 'bg-muted cursor-not-allowed' : 'bg-background'}}"
+            [class.animate-shake]="errorMessage"
+          />
         </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="mb-6">
+        <button
+          (click)="validateCode()"
+          [disabled]="isLoading || !code"
+          class="w-full h-12 bg-gradient-to-l from-primary to-secondary text-white font-bold rounded-xl
+                 hover:opacity-90 active:scale-[0.98] transition-all duration-200
+                 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <span *ngIf="!isLoading">تسجيل الدخول</span>
+          <span *ngIf="isLoading" class="inline-flex items-center gap-2">
+            <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            جاري التحقق...
+          </span>
+        </button>
       </div>
 
       <!-- Error Message -->
@@ -64,14 +75,6 @@
           <p class="text-red-600 text-sm font-medium">
             {{ errorMessage }}
           </p>
-        </div>
-      </div>
-
-      <!-- Loading State -->
-      <div *ngIf="isLoading" class="text-center mb-6">
-        <div class="inline-flex items-center gap-2 text-muted-foreground">
-          <div class="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-          <span>جاري التحقق من الكود...</span>
         </div>
       </div>
 
