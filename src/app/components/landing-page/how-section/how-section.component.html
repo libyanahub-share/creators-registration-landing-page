@@ -1,0 +1,36 @@
+<section class="how-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2 class="section-title">كيف تبدأ؟</h2>
+      <p class="section-subtitle">
+        خطوات بسيطة للانضمام إلى منصتنا والبدء في مشاركة خبراتك. سيتم استبداله بالمحتوى النهائي من فريق التسويق.
+      </p>
+    </div>
+
+    <!-- Timeline Steps -->
+    <div class="timeline">
+      <div *ngFor="let step of steps; let i = index; let isLast = last" class="timeline-item">
+        <div class="timeline-content">
+          <div class="step-number">{{ step.number }}</div>
+          <div class="step-details">
+            <h3 class="step-title">{{ step.title }}</h3>
+            <p class="step-description">{{ step.description }}</p>
+          </div>
+        </div>
+        <div *ngIf="!isLast" class="timeline-line"></div>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="cta-wrapper">
+      <button class="cta-button">
+        ابدأ الآن
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 5 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
