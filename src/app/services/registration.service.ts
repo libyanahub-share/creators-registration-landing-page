@@ -56,16 +56,10 @@ export class RegistrationService {
     formData.append('preferred_communication_channel', data.preferred_communication_channel);
     formData.append('bio', data.bio);
 
-    // Append communication channel fields conditionally
-    if (data.email) {
-      formData.append('email', data.email);
-    }
-    if (data.phone_number) {
-      formData.append('phone_number', data.phone_number);
-    }
-    if (data.whatsapp_number) {
-      formData.append('whatsapp_number', data.whatsapp_number);
-    }
+    // Append all communication channel fields (empty string if not used)
+    formData.append('email', data.email || '');
+    formData.append('phone_number', data.phone_number || '');
+    formData.append('whatsapp_number', data.whatsapp_number || '');
 
     // Append arrays as JSON strings or individual items
     data.expertise.forEach((exp: string, index: number) => {

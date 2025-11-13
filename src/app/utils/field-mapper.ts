@@ -86,21 +86,13 @@ export function mapRegistrationData(frontendData: FrontendRegistrationData): Bac
   const backendData: BackendRegistrationData = {
     full_name: frontendData.fullName,
     preferred_communication_channel: frontendData.preferredCommunicationChannel,
+    email: frontendData.email || '',
+    phone_number: frontendData.phone || '',
+    whatsapp_number: frontendData.whatsappNumber || '',
     expertise: mapExpertise(frontendData.expertise),
     teaching_methods: mapTeachingMethods(frontendData.teachingMethods),
     bio: frontendData.bio,
   };
-
-  // Add communication channel fields based on preference
-  if (frontendData.preferredCommunicationChannel === 'email' && frontendData.email) {
-    backendData.email = frontendData.email;
-  }
-  if (frontendData.preferredCommunicationChannel === 'sms' && frontendData.phone) {
-    backendData.phone_number = frontendData.phone;
-  }
-  if (frontendData.preferredCommunicationChannel === 'whatsapp' && frontendData.whatsappNumber) {
-    backendData.whatsapp_number = frontendData.whatsappNumber;
-  }
 
   // Add video if exists
   if (frontendData.introVideo) {
