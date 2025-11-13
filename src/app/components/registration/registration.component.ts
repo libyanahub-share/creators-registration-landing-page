@@ -7,14 +7,16 @@ import { RegistrationService } from '../../services/registration.service';
 export interface RegistrationData {
   // Step 1: Personal Info
   fullName: string;
+  preferredCommunicationChannel: 'email' | 'sms' | 'whatsapp' | '';
   email: string;
   phone: string;
-  
+  whatsappNumber: string;
+
   // Step 2: Teaching Info
   expertise: string[];
   teachingMethods: string[]; // Changed from single to multiple
   bio: string;
-  
+
   // Step 3: Video (was Step 4)
   introVideo: File | null;
   introVideoUrl: string;

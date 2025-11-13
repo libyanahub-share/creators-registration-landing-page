@@ -8,7 +8,7 @@
 
   <div class="container" [class.desktop]="isDesktop">
     <!-- Feature Section 3 - Tabbed Content -->
-    <div class="feature-item feature-last section-3">
+    <div class="feature-item feature-last section-3" [@fadeInLeft]="section3State">
       <h2 class="title text-center">
         {{ t('featureTitle') }}
         <strong>{{ t('featureTitleBold') }}</strong>
