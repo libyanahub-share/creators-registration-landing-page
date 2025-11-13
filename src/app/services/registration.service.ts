@@ -51,11 +51,21 @@ export class RegistrationService {
   private submitWithVideo(url: string, data: any): Observable<RegistrationResponse> {
     const formData = new FormData();
 
-    // Append all fields to FormData
+    // Append required fields
     formData.append('full_name', data.full_name);
-    formData.append('email', data.email);
-    formData.append('phone_number', data.phone_number);
+    formData.append('preferred_communication_channel', data.preferred_communication_channel);
     formData.append('bio', data.bio);
+
+    // Append communication channel fields conditionally
+    if (data.email) {
+      formData.append('email', data.email);
+    }
+    if (data.phone_number) {
+      formData.append('phone_number', data.phone_number);
+    }
+    if (data.whatsapp_number) {
+      formData.append('whatsapp_number', data.whatsapp_number);
+    }
 
     // Append arrays as JSON strings or individual items
     data.expertise.forEach((exp: string, index: number) => {
