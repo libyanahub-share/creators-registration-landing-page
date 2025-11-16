@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { ScrollRevealDirective } from '../../../directives/scroll-reveal.directive';
+import { translations } from '../../../translations';
 
 @Component({
   selector: 'app-how-section',
@@ -10,6 +12,10 @@ import { ScrollRevealDirective } from '../../../directives/scroll-reveal.directi
   styleUrl: './how-section.component.scss'
 })
 export class HowSectionComponent {
+  translations = translations;
+
+  constructor(private router: Router) {}
+
   steps = [
     {
       number: 1,
@@ -32,4 +38,12 @@ export class HowSectionComponent {
       description: 'نص وصفي للخطوة الرابعة. سيتم استبداله بالمحتوى النهائي من فريق التسويق.'
     }
   ];
+
+  t(key: string): string {
+    return (translations as any)[key]?.['ar'] || '';
+  }
+
+  navigateToRegister(): void {
+    this.router.navigate(['/register']);
+  }
 }
