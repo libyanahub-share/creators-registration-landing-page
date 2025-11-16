@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
   // Form data
   formData: RegistrationData = {
     fullName: '',
-    preferredCommunicationChannel: '',
+    preferredCommunicationChannel: 'sms',
     email: '',
     phone: '',
     whatsappNumber: '',
@@ -117,13 +117,54 @@ export class RegistrationComponent implements OnInit {
   }
   
   /**
-   * Go to specific step
+   * Go to specific step (only if previous steps are complete)
    */
   goToStep(step: number): void {
-    if (step >= 1 && step <= this.totalSteps) {
+    if (step < 1 || step > this.totalSteps) {
+      return;
+    }
+
+    // Allow going back to previous steps
+    if (step < this.currentStep) {
       this.currentStep = step;
       this.scrollToTop();
+      return;
     }
+
+    // Check if all previous steps are completed
+    for (let i = 1; i < step; i++) {
+      const previousStepCache = this.currentStep;
+      this.currentStep = i;
+      if (!this.validateCurrentStep()) {
+        this.currentStep = previousStepCache;
+        return; // Don't allow navigation if previous step is incomplete
+      }
+      this.currentStep = previousStepCache;
+    }
+
+    // All previous steps are complete, allow navigation
+    this.currentStep = step;
+    this.scrollToTop();
+  }
+
+  /**
+   * Check if a step is accessible (all previous steps are complete)
+   */
+  isStepAccessible(step: number): boolean {
+    if (step === 1) return true;
+    if (step <= this.currentStep) return true;
+
+    // Check if all previous steps are complete
+    for (let i = 1; i < step; i++) {
+      const currentStepCache = this.currentStep;
+      this.currentStep = i;
+      const isValid = this.validateCurrentStep();
+      this.currentStep = currentStepCache;
+      if (!isValid) {
+        return false;
+      }
+    }
+    return true;
   }
   
   /**
@@ -150,8 +191,7 @@ export class RegistrationComponent implements OnInit {
         }
       case 2:
         return this.formData.expertise.length > 0 &&
-               this.formData.teachingMethods.length > 0 &&
-               this.formData.bio.trim() !== '';
+               this.formData.teachingMethods.length > 0;
       case 3:
         return this.formData.introVideo !== null || this.formData.introVideoUrl !== '';
       case 4:

@@ -55,12 +55,15 @@
       
       <!-- Step Indicators -->
       <div class="flex justify-between mb-10 overflow-x-auto pb-2">
-        <div *ngFor="let step of [1, 2, 3, 4]" 
-             class="flex flex-col items-center gap-2 flex-shrink-0 cursor-pointer"
-             (click)="goToStep(step)">
+        <div *ngFor="let step of [1, 2, 3, 4]"
+             class="flex flex-col items-center gap-2 flex-shrink-0 transition-all"
+             [class.cursor-pointer]="isStepAccessible(step)"
+             [class.cursor-not-allowed]="!isStepAccessible(step)"
+             [class.opacity-50]="!isStepAccessible(step)"
+             (click)="isStepAccessible(step) && goToStep(step)">
           <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all"
-               [class]="currentStep === step ? 'gradient-primary text-white' : 
-                        isStepComplete(step) ? 'bg-green-100 text-green-600' : 
+               [class]="currentStep === step ? 'gradient-primary text-white' :
+                        isStepComplete(step) ? 'bg-green-100 text-green-600' :
                         'bg-muted text-muted-foreground'">
             <span *ngIf="!isStepComplete(step) || currentStep === step">{{ step }}</span>
             <svg *ngIf="isStepComplete(step) && currentStep !== step" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -87,7 +90,7 @@
 
           <div>
             <label class="block text-right text-sm font-medium text-foreground mb-2">
-              الاسم الكامل *
+              الاسم الكامل <span class="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -101,10 +104,86 @@
               required>
           </div>
 
+          <!-- Contact Information Fields (Always Visible) -->
+          <div class="space-y-4">
+            <!-- Email Field -->
+            <div>
+              <label class="block text-right text-sm font-medium text-foreground mb-2">
+                البريد الإلكتروني
+                <span *ngIf="formData.preferredCommunicationChannel === 'email'" class="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                [(ngModel)]="formData.email"
+                name="email"
+                (ngModelChange)="saveDraft()"
+                [class]="'w-full px-4 py-3 border-2 rounded-xl transition-all ' +
+                         (formData.preferredCommunicationChannel === 'email' ?
+                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
+                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
+                         ' focus:outline-none'"
+                placeholder="example@email.com">
+              <p *ngIf="formData.preferredCommunicationChannel === 'email' && formData.email && !isValidEmail(formData.email)"
+                 class="text-sm text-red-500 text-right mt-1">
+                الرجاء إدخال بريد إلكتروني صحيح
+              </p>
+            </div>
+
+            <!-- Phone Number Field (SMS) -->
+            <div>
+              <label class="block text-right text-sm font-medium text-foreground mb-2">
+                رقم الهاتف (SMS)
+                <span *ngIf="formData.preferredCommunicationChannel === 'sms'" class="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                [(ngModel)]="formData.phone"
+                name="phone"
+                (ngModelChange)="saveDraft()"
+                [class]="'w-full px-4 py-3 border-2 rounded-xl text-right transition-all ' +
+                         (formData.preferredCommunicationChannel === 'sms' ?
+                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
+                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
+                         ' focus:outline-none'"
+                placeholder="092-1234567 أو 094-1234567">
+              <p *ngIf="formData.preferredCommunicationChannel === 'sms'"
+                 class="text-xs text-muted-foreground text-right mt-1">
+                يجب أن يكون الرقم من ليبيانا (092 أو 094)
+              </p>
+              <p *ngIf="formData.preferredCommunicationChannel === 'sms' && formData.phone && !isValidLibyanaPhone(formData.phone)"
+                 class="text-sm text-red-500 text-right mt-1">
+                الرجاء إدخال رقم هاتف ليبيانا صحيح (092 أو 094)
+              </p>
+            </div>
+
+            <!-- WhatsApp Number Field -->
+            <div>
+              <label class="block text-right text-sm font-medium text-foreground mb-2">
+                رقم واتساب
+                <span *ngIf="formData.preferredCommunicationChannel === 'whatsapp'" class="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                [(ngModel)]="formData.whatsappNumber"
+                name="whatsappNumber"
+                (ngModelChange)="saveDraft()"
+                [class]="'w-full px-4 py-3 border-2 rounded-xl text-right transition-all ' +
+                         (formData.preferredCommunicationChannel === 'whatsapp' ?
+                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
+                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
+                         ' focus:outline-none'"
+                placeholder="+218912345678">
+              <p *ngIf="formData.preferredCommunicationChannel === 'whatsapp' && formData.whatsappNumber && !isValidPhone(formData.whatsappNumber)"
+                 class="text-sm text-red-500 text-right mt-1">
+                الرجاء إدخال رقم واتساب صحيح (على الأقل 9 أرقام)
+              </p>
+            </div>
+          </div>
+
           <!-- Communication Channel Selection -->
           <div>
             <label class="block text-right text-sm font-medium text-foreground mb-3">
-              وسيلة التواصل المفضلة * (اختر واحدة)
+              وسيلة التواصل المفضلة <span class="text-red-500">*</span> (اختر واحدة)
             </label>
             <p class="text-sm text-muted-foreground text-right mb-4">
               اختر الطريقة التي تفضل أن نتواصل معك من خلالها
@@ -168,82 +247,6 @@
               </button>
             </div>
           </div>
-
-          <!-- Contact Information Fields (Always Visible) -->
-          <div class="space-y-4">
-            <!-- Email Field -->
-            <div>
-              <label class="block text-right text-sm font-medium text-foreground mb-2">
-                البريد الإلكتروني
-                <span *ngIf="formData.preferredCommunicationChannel === 'email'" class="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                [(ngModel)]="formData.email"
-                name="email"
-                (ngModelChange)="saveDraft()"
-                [class]="'w-full px-4 py-3 border-2 rounded-xl transition-all ' +
-                         (formData.preferredCommunicationChannel === 'email' ?
-                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
-                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
-                         ' focus:outline-none'"
-                placeholder="example@email.com">
-              <p *ngIf="formData.preferredCommunicationChannel === 'email' && formData.email && !isValidEmail(formData.email)"
-                 class="text-sm text-red-500 text-right mt-1">
-                الرجاء إدخال بريد إلكتروني صحيح
-              </p>
-            </div>
-
-            <!-- Phone Number Field (SMS) -->
-            <div>
-              <label class="block text-right text-sm font-medium text-foreground mb-2">
-                رقم الهاتف (SMS)
-                <span *ngIf="formData.preferredCommunicationChannel === 'sms'" class="text-red-500">*</span>
-              </label>
-              <input
-                type="tel"
-                [(ngModel)]="formData.phone"
-                name="phone"
-                (ngModelChange)="saveDraft()"
-                [class]="'w-full px-4 py-3 border-2 rounded-xl text-right transition-all ' +
-                         (formData.preferredCommunicationChannel === 'sms' ?
-                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
-                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
-                         ' focus:outline-none'"
-                placeholder="092-1234567 أو 094-1234567">
-              <p *ngIf="formData.preferredCommunicationChannel === 'sms'"
-                 class="text-xs text-muted-foreground text-right mt-1">
-                يجب أن يكون الرقم من ليبيانا (092 أو 094)
-              </p>
-              <p *ngIf="formData.preferredCommunicationChannel === 'sms' && formData.phone && !isValidLibyanaPhone(formData.phone)"
-                 class="text-sm text-red-500 text-right mt-1">
-                الرجاء إدخال رقم ليبيانا صحيح (092-******* أو 094-*******)
-              </p>
-            </div>
-
-            <!-- WhatsApp Number Field -->
-            <div>
-              <label class="block text-right text-sm font-medium text-foreground mb-2">
-                رقم واتساب
-                <span *ngIf="formData.preferredCommunicationChannel === 'whatsapp'" class="text-red-500">*</span>
-              </label>
-              <input
-                type="tel"
-                [(ngModel)]="formData.whatsappNumber"
-                name="whatsappNumber"
-                (ngModelChange)="saveDraft()"
-                [class]="'w-full px-4 py-3 border-2 rounded-xl text-right transition-all ' +
-                         (formData.preferredCommunicationChannel === 'whatsapp' ?
-                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
-                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
-                         ' focus:outline-none'"
-                placeholder="+218912345678">
-              <p *ngIf="formData.preferredCommunicationChannel === 'whatsapp' && formData.whatsappNumber && !isValidPhone(formData.whatsappNumber)"
-                 class="text-sm text-red-500 text-right mt-1">
-                الرجاء إدخال رقم واتساب صحيح (على الأقل 9 أرقام)
-              </p>
-            </div>
-          </div>
         </div>
         
         <!-- Step 2: Teaching Information -->
@@ -254,7 +257,7 @@
           
           <div>
             <label class="block text-right text-sm font-medium text-foreground mb-3">
-              طرق التدريس المفضلة * (اختر واحد أو أكثر)
+              طرق التدريس المفضلة <span class="text-red-500">*</span> (اختر واحد أو أكثر)
             </label>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               <button
@@ -272,7 +275,7 @@
           
           <div>
             <label class="block text-right text-sm font-medium text-foreground mb-3">
-              مجالات الخبرة * (اختر واحد أو أكثر)
+              مجالات الخبرة <span class="text-red-500">*</span> (اختر واحد أو أكثر)
             </label>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
               <button
@@ -290,7 +293,7 @@
           
           <div>
             <label class="block text-right text-sm font-medium text-foreground mb-2">
-              نبذة تعريفية موجزة *
+              نبذة تعريفية موجزة
             </label>
             <textarea
               [(ngModel)]="formData.bio"
@@ -300,8 +303,7 @@
               class="w-full px-4 py-3 border-2 border-border rounded-xl text-right
                      focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
                      transition-all resize-none"
-              placeholder="اكتب نبذة مختصرة عن نفسك وخبرتك..."
-              required></textarea>
+              placeholder="اكتب نبذة مختصرة عن نفسك وخبرتك..."></textarea>
             <p class="text-sm text-muted-foreground text-right mt-2">
               {{ formData.bio.length }} حرف
             </p>
@@ -410,7 +412,18 @@
               <div class="space-y-2 text-right">
                 <p><strong>مجالات الخبرة:</strong> {{ formData.expertise.join('، ') }}</p>
                 <p><strong>طرق التدريس:</strong> {{ formData.teachingMethods.join('، ') }}</p>
-                <p><strong>النبذة التعريفية:</strong> {{ formData.bio }}</p>
+                <div>
+                  <p class="mb-2"><strong>النبذة التعريفية:</strong></p>
+                  <textarea
+                    *ngIf="formData.bio"
+                    [value]="formData.bio"
+                    readonly
+                    rows="4"
+                    class="w-full px-4 py-3 border-2 border-border bg-muted/30 rounded-xl text-right
+                           resize-none text-foreground cursor-default focus:outline-none"
+                  ></textarea>
+                  <p *ngIf="!formData.bio" class="text-muted-foreground text-sm">لم يتم إدخال نبذة تعريفية</p>
+                </div>
               </div>
             </div>
             
