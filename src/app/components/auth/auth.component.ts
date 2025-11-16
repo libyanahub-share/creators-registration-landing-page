@@ -33,6 +33,11 @@ export class AuthComponent {
 
     this.code = value;
     input.value = value;
+
+    // Clear error message when user starts typing again
+    if (this.errorMessage) {
+      this.errorMessage = '';
+    }
   }
 
   /**

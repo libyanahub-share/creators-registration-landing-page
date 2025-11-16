@@ -40,10 +40,10 @@
             type="text"
             [(ngModel)]="code"
             (input)="onCodeInput($event)"
+            (keyup.enter)="validateCode()"
             [disabled]="isLoading"
             pattern="[A-Z0-9]{4}"
             autocomplete="off"
-            placeholder="A3K9"
             class="w-full h-16 text-center text-2xl font-bold border-2 rounded-xl uppercase
                    focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
                    transition-all duration-200
