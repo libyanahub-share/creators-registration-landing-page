@@ -16,7 +16,7 @@ export const translations = {
     ar: 'احصل على الوصول إلى آلاف الدورات التعليمية وتعلم من المدربين الخبراء. اكتسب مهاراتك من خلال المشاريع العملية والدروس التفاعلية.'
   },
   heroWatchVideo: { en: 'WATCH VIDEO', ar: 'شاهد الفيديو' },
-  heroGetStarted: { en: 'GET STARTED', ar: 'ابدأ الآن' },
+  heroGetStarted: { en: 'GET STARTED', ar: 'سجّل الآن' },
   heroVideoTitle: { en: 'Learn from Expert Instructors', ar: 'تعلم من المدربين الخبراء' },
   heroBuyNow: { en: 'BUY NOW', ar: 'اشتري الآن' },
 
