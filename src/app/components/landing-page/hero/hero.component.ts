@@ -1,13 +1,12 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { SafePipe } from './safe.pipe';
 import { translations } from '../../../translations';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, SafePipe],
+  imports: [CommonModule],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss'
 })
