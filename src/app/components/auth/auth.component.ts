@@ -22,11 +22,34 @@ export class AuthComponent {
   ) {}
 
   /**
+   * Handle code input - auto-uppercase and filter invalid characters
+   */
+  onCodeInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.toUpperCase();
+
+    // Only allow alphanumeric characters
+    value = value.replace(/[^A-Z0-9]/g, '');
+
+    // Limit to 4 characters
+    value = value.substring(0, 4);
+
+    this.code = value;
+    input.value = value;
+  }
+
+  /**
    * Validate the code
    */
   validateCode(): void {
     if (!this.code || this.code.trim() === '') {
       this.errorMessage = 'الرجاء إدخال كود الدخول';
+      return;
+    }
+
+    // Validate format (4 alphanumeric characters)
+    if (this.code.length !== 4 || !/^[A-Z0-9]{4}$/.test(this.code)) {
+      this.errorMessage = 'الكود يجب أن يكون 4 أحرف أو أرقام';
       return;
     }
 
