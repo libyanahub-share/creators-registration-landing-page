@@ -31,9 +31,6 @@ export class AuthComponent {
     // Only allow alphanumeric characters
     value = value.replace(/[^A-Z0-9]/g, '');
 
-    // Limit to 4 characters
-    value = value.substring(0, 4);
-
     this.code = value;
     input.value = value;
   }
