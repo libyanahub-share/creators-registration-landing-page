@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../../services/registration.service';
+import { IndexedDbService } from '../../services/indexed-db.service';
 
 export interface RegistrationData {
   // Step 1: Personal Info
@@ -86,7 +87,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private registrationService: RegistrationService
+    private registrationService: RegistrationService,
+    private indexedDbService: IndexedDbService
   ) {}
   
   ngOnInit(): void {
@@ -277,13 +279,19 @@ export class RegistrationComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-      
+
       // Basic validation
       if (file.type.startsWith('video/')) {
         this.formData.introVideo = file;
-        
+
         // Create preview URL
         this.formData.introVideoUrl = URL.createObjectURL(file);
+
+        // Save video to IndexedDB for persistence across page refreshes
+        this.indexedDbService.saveVideo(file).catch(error => {
+          console.error('Failed to save video to IndexedDB:', error);
+        });
+
         this.saveDraft();
       } else {
         alert('الرجاء اختيار ملف فيديو صالح');
@@ -297,6 +305,12 @@ export class RegistrationComponent implements OnInit {
   removeVideo(): void {
     this.formData.introVideo = null;
     this.formData.introVideoUrl = '';
+
+    // Clear video from IndexedDB
+    this.indexedDbService.clearVideo().catch(error => {
+      console.error('Failed to clear video from IndexedDB:', error);
+    });
+
     this.saveDraft();
   }
   
@@ -313,9 +327,10 @@ export class RegistrationComponent implements OnInit {
   }
   
   /**
-   * Load draft from localStorage
+   * Load draft from localStorage and video from IndexedDB
    */
-  loadDraft(): void {
+  async loadDraft(): Promise<void> {
+    // Load form data from localStorage
     const draft = localStorage.getItem(this.STORAGE_KEY);
     if (draft) {
       try {
@@ -326,13 +341,30 @@ export class RegistrationComponent implements OnInit {
         console.error('Failed to load draft:', e);
       }
     }
+
+    // Load video from IndexedDB
+    try {
+      const videoFile = await this.indexedDbService.getVideo();
+      if (videoFile) {
+        this.formData.introVideo = videoFile;
+        // Recreate the blob URL for the video preview
+        this.formData.introVideoUrl = URL.createObjectURL(videoFile);
+      }
+    } catch (error) {
+      console.error('Failed to load video from IndexedDB:', error);
+    }
   }
   
   /**
-   * Clear draft from localStorage
+   * Clear draft from localStorage and IndexedDB
    */
   clearDraft(): void {
     localStorage.removeItem(this.STORAGE_KEY);
+
+    // Clear all data from IndexedDB (including video)
+    this.indexedDbService.clearAll().catch(error => {
+      console.error('Failed to clear IndexedDB:', error);
+    });
   }
   
   /**
