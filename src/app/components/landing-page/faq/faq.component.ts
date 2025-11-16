@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ScrollRevealDirective } from '../../../directives/scroll-reveal.directive';
 import { translations } from '../../../translations';
 
 interface FaqItem {
@@ -10,7 +11,7 @@ interface FaqItem {
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ScrollRevealDirective],
   templateUrl: './faq.component.html',
   styleUrl: './faq.component.scss'
 })

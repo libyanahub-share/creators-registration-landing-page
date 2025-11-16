@@ -1,7 +1,7 @@
 <section class="why-section">
   <div class="container">
     <!-- Section Header -->
-    <div class="section-header">
+    <div class="section-header" appScrollReveal="fade-up">
       <h2 class="section-title">لماذا ليبيانا هب؟</h2>
       <p class="section-subtitle">
         نص تعريفي قصير عن المنصة والفوائد. سيتم استبداله بالمحتوى النهائي من فريق التسويق.
@@ -10,7 +10,7 @@
 
     <!-- Reasons Cards -->
     <div class="reasons-grid">
-      <div *ngFor="let reason of reasons" class="reason-card">
+      <div *ngFor="let reason of reasons; let i = index" class="reason-card" appScrollReveal="fade-up" [delay]="i * 150">
         <div class="card-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <!-- Trending Up Icon -->

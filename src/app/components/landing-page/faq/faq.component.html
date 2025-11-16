@@ -2,16 +2,16 @@
   <div class="container">
     <div class="grid-container">
       <div class="grid-item-left">
-        <div class="title-wrapper" [class.center]="isMobile">
+        <div class="title-wrapper" [class.center]="isMobile" appScrollReveal="fade-right">
           <h2 class="section-title">
             <strong>{{ t('faqTitle') }}</strong>
           </h2>
         </div>
-        <p class="text subtitle" [class.center]="isMobile">
+        <p class="text subtitle" [class.center]="isMobile" appScrollReveal="fade-right" [delay]="100">
           {{ t('faqSubtitle') }}
         </p>
         @if (!isMobile) {
-          <div class="illustration">
+          <div class="illustration" appScrollReveal="scale" [delay]="200">
             <div class="parallax-medium"></div>
             <img src="assets/faq.png" alt="illustration" />
           </div>
@@ -20,7 +20,7 @@
       <div class="grid-item-right">
         <div class="accordion">
           @for (item of faqs; track $index) {
-            <div class="item">
+            <div class="item" appScrollReveal="fade-left" [delay]="$index * 100">
               <div class="paper" [class.expanded]="isExpanded($index)">
                 <div class="accordion-summary" (click)="handleChange($index)">
                   <div class="content" [class.expanded]="isExpanded($index)">

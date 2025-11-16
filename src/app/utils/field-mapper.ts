@@ -57,8 +57,10 @@ export function mapExpertise(arabicExpertise: string[]): string[] {
  */
 export interface FrontendRegistrationData {
   fullName: string;
+  preferredCommunicationChannel: string;
   email: string;
   phone: string;
+  whatsappNumber: string;
   expertise: string[];
   teachingMethods: string[];
   bio: string;
@@ -67,8 +69,10 @@ export interface FrontendRegistrationData {
 
 export interface BackendRegistrationData {
   full_name: string;
-  email: string;
-  phone_number: string;
+  preferred_communication_channel: string;
+  email?: string;
+  phone_number?: string;
+  whatsapp_number?: string;
   expertise: string[];
   teaching_methods: string[];
   bio: string;
@@ -79,13 +83,21 @@ export interface BackendRegistrationData {
  * Transform frontend data to backend format
  */
 export function mapRegistrationData(frontendData: FrontendRegistrationData): BackendRegistrationData {
-  return {
+  const backendData: BackendRegistrationData = {
     full_name: frontendData.fullName,
-    email: frontendData.email,
-    phone_number: frontendData.phone,
+    preferred_communication_channel: frontendData.preferredCommunicationChannel,
+    email: frontendData.email || '',
+    phone_number: frontendData.phone || '',
+    whatsapp_number: frontendData.whatsappNumber || '',
     expertise: mapExpertise(frontendData.expertise),
     teaching_methods: mapTeachingMethods(frontendData.teachingMethods),
     bio: frontendData.bio,
-    ...(frontendData.introVideo && { video: frontendData.introVideo })
   };
+
+  // Add video if exists
+  if (frontendData.introVideo) {
+    backendData.video = frontendData.introVideo;
+  }
+
+  return backendData;
 }

@@ -84,7 +84,7 @@
           <h2 class="text-2xl font-bold text-foreground text-right mb-6">
             المعلومات الشخصية
           </h2>
-          
+
           <div>
             <label class="block text-right text-sm font-medium text-foreground mb-2">
               الاسم الكامل *
@@ -100,37 +100,149 @@
               placeholder="أدخل اسمك الكامل"
               required>
           </div>
-          
+
+          <!-- Communication Channel Selection -->
           <div>
-            <label class="block text-right text-sm font-medium text-foreground mb-2">
-              البريد الإلكتروني *
+            <label class="block text-right text-sm font-medium text-foreground mb-3">
+              وسيلة التواصل المفضلة * (اختر واحدة)
             </label>
-            <input
-              type="email"
-              [(ngModel)]="formData.email"
-              name="email"
-              (ngModelChange)="saveDraft()"
-              class="w-full px-4 py-3 border-2 border-border rounded-xl
-                     focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
-                     transition-all"
-              placeholder="example@email.com"
-              required>
+            <p class="text-sm text-muted-foreground text-right mb-4">
+              اختر الطريقة التي تفضل أن نتواصل معك من خلالها
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <!-- Email Option -->
+              <button
+                type="button"
+                (click)="formData.preferredCommunicationChannel = 'email'; saveDraft()"
+                class="px-4 py-4 rounded-xl font-medium transition-all text-right border-2 flex items-center gap-3"
+                [class]="formData.preferredCommunicationChannel === 'email'
+                  ? 'gradient-primary text-white border-transparent'
+                  : 'bg-background text-foreground border-border hover:border-primary'">
+                <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0"
+                     [class]="formData.preferredCommunicationChannel === 'email' ? 'border-white' : 'border-border'">
+                  <div *ngIf="formData.preferredCommunicationChannel === 'email'"
+                       class="w-3 h-3 rounded-full bg-white"></div>
+                </div>
+                <div class="flex-1 text-right">
+                  <div class="font-bold">البريد الإلكتروني</div>
+                  <div class="text-xs opacity-90">Email</div>
+                </div>
+              </button>
+
+              <!-- SMS Option -->
+              <button
+                type="button"
+                (click)="formData.preferredCommunicationChannel = 'sms'; saveDraft()"
+                class="px-4 py-4 rounded-xl font-medium transition-all text-right border-2 flex items-center gap-3"
+                [class]="formData.preferredCommunicationChannel === 'sms'
+                  ? 'gradient-primary text-white border-transparent'
+                  : 'bg-background text-foreground border-border hover:border-primary'">
+                <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0"
+                     [class]="formData.preferredCommunicationChannel === 'sms' ? 'border-white' : 'border-border'">
+                  <div *ngIf="formData.preferredCommunicationChannel === 'sms'"
+                       class="w-3 h-3 rounded-full bg-white"></div>
+                </div>
+                <div class="flex-1 text-right">
+                  <div class="font-bold">رسائل SMS</div>
+                  <div class="text-xs opacity-90">رسائل نصية</div>
+                </div>
+              </button>
+
+              <!-- WhatsApp Option -->
+              <button
+                type="button"
+                (click)="formData.preferredCommunicationChannel = 'whatsapp'; saveDraft()"
+                class="px-4 py-4 rounded-xl font-medium transition-all text-right border-2 flex items-center gap-3"
+                [class]="formData.preferredCommunicationChannel === 'whatsapp'
+                  ? 'gradient-primary text-white border-transparent'
+                  : 'bg-background text-foreground border-border hover:border-primary'">
+                <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0"
+                     [class]="formData.preferredCommunicationChannel === 'whatsapp' ? 'border-white' : 'border-border'">
+                  <div *ngIf="formData.preferredCommunicationChannel === 'whatsapp'"
+                       class="w-3 h-3 rounded-full bg-white"></div>
+                </div>
+                <div class="flex-1 text-right">
+                  <div class="font-bold">واتساب</div>
+                  <div class="text-xs opacity-90">WhatsApp</div>
+                </div>
+              </button>
+            </div>
           </div>
-          
-          <div>
-            <label class="block text-right text-sm font-medium text-foreground mb-2">
-              رقم الهاتف *
-            </label>
-            <input
-              type="tel"
-              [(ngModel)]="formData.phone"
-              name="phone"
-              (ngModelChange)="saveDraft()"
-              class="w-full px-4 py-3 border-2 border-border rounded-xl
-                     focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
-                     transition-all"
-              placeholder="0912345678"
-              required>
+
+          <!-- Contact Information Fields (Always Visible) -->
+          <div class="space-y-4">
+            <!-- Email Field -->
+            <div>
+              <label class="block text-right text-sm font-medium text-foreground mb-2">
+                البريد الإلكتروني
+                <span *ngIf="formData.preferredCommunicationChannel === 'email'" class="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                [(ngModel)]="formData.email"
+                name="email"
+                (ngModelChange)="saveDraft()"
+                [class]="'w-full px-4 py-3 border-2 rounded-xl transition-all ' +
+                         (formData.preferredCommunicationChannel === 'email' ?
+                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
+                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
+                         ' focus:outline-none'"
+                placeholder="example@email.com">
+              <p *ngIf="formData.preferredCommunicationChannel === 'email' && formData.email && !isValidEmail(formData.email)"
+                 class="text-sm text-red-500 text-right mt-1">
+                الرجاء إدخال بريد إلكتروني صحيح
+              </p>
+            </div>
+
+            <!-- Phone Number Field (SMS) -->
+            <div>
+              <label class="block text-right text-sm font-medium text-foreground mb-2">
+                رقم الهاتف (SMS)
+                <span *ngIf="formData.preferredCommunicationChannel === 'sms'" class="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                [(ngModel)]="formData.phone"
+                name="phone"
+                (ngModelChange)="saveDraft()"
+                [class]="'w-full px-4 py-3 border-2 rounded-xl text-right transition-all ' +
+                         (formData.preferredCommunicationChannel === 'sms' ?
+                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
+                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
+                         ' focus:outline-none'"
+                placeholder="092-1234567 أو 094-1234567">
+              <p *ngIf="formData.preferredCommunicationChannel === 'sms'"
+                 class="text-xs text-muted-foreground text-right mt-1">
+                يجب أن يكون الرقم من ليبيانا (092 أو 094)
+              </p>
+              <p *ngIf="formData.preferredCommunicationChannel === 'sms' && formData.phone && !isValidLibyanaPhone(formData.phone)"
+                 class="text-sm text-red-500 text-right mt-1">
+                الرجاء إدخال رقم ليبيانا صحيح (092-******* أو 094-*******)
+              </p>
+            </div>
+
+            <!-- WhatsApp Number Field -->
+            <div>
+              <label class="block text-right text-sm font-medium text-foreground mb-2">
+                رقم واتساب
+                <span *ngIf="formData.preferredCommunicationChannel === 'whatsapp'" class="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                [(ngModel)]="formData.whatsappNumber"
+                name="whatsappNumber"
+                (ngModelChange)="saveDraft()"
+                [class]="'w-full px-4 py-3 border-2 rounded-xl text-right transition-all ' +
+                         (formData.preferredCommunicationChannel === 'whatsapp' ?
+                          'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
+                          'border-border focus:border-border focus:ring-1 focus:ring-border') +
+                         ' focus:outline-none'"
+                placeholder="+218912345678">
+              <p *ngIf="formData.preferredCommunicationChannel === 'whatsapp' && formData.whatsappNumber && !isValidPhone(formData.whatsappNumber)"
+                 class="text-sm text-red-500 text-right mt-1">
+                الرجاء إدخال رقم واتساب صحيح (على الأقل 9 أرقام)
+              </p>
+            </div>
           </div>
         </div>
         

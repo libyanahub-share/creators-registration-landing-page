@@ -7,14 +7,16 @@ import { RegistrationService } from '../../services/registration.service';
 export interface RegistrationData {
   // Step 1: Personal Info
   fullName: string;
+  preferredCommunicationChannel: 'email' | 'sms' | 'whatsapp' | '';
   email: string;
   phone: string;
-  
+  whatsappNumber: string;
+
   // Step 2: Teaching Info
   expertise: string[];
   teachingMethods: string[]; // Changed from single to multiple
   bio: string;
-  
+
   // Step 3: Video (was Step 4)
   introVideo: File | null;
   introVideoUrl: string;
@@ -34,8 +36,10 @@ export class RegistrationComponent implements OnInit {
   // Form data
   formData: RegistrationData = {
     fullName: '',
+    preferredCommunicationChannel: '',
     email: '',
     phone: '',
+    whatsappNumber: '',
     expertise: [],
     teachingMethods: [], // Changed from teachingMethod to teachingMethods array
     bio: '',
@@ -128,9 +132,22 @@ export class RegistrationComponent implements OnInit {
   validateCurrentStep(): boolean {
     switch (this.currentStep) {
       case 1:
-        return this.formData.fullName.trim() !== '' &&
-               this.formData.email.trim() !== '' &&
-               this.formData.phone.trim() !== '';
+        // Full name and channel selection are required
+        if (this.formData.fullName.trim() === '' || this.formData.preferredCommunicationChannel === '') {
+          return false;
+        }
+
+        // Validate based on selected channel
+        switch (this.formData.preferredCommunicationChannel) {
+          case 'email':
+            return this.formData.email.trim() !== '' && this.isValidEmail(this.formData.email);
+          case 'sms':
+            return this.formData.phone.trim() !== '' && this.isValidLibyanaPhone(this.formData.phone);
+          case 'whatsapp':
+            return this.formData.whatsappNumber.trim() !== '' && this.isValidPhone(this.formData.whatsappNumber);
+          default:
+            return false;
+        }
       case 2:
         return this.formData.expertise.length > 0 &&
                this.formData.teachingMethods.length > 0 &&
@@ -142,6 +159,38 @@ export class RegistrationComponent implements OnInit {
       default:
         return false;
     }
+  }
+
+  /**
+   * Validate email format
+   */
+  isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  /**
+   * Validate phone number format
+   */
+  isValidPhone(phone: string): boolean {
+    // Allow numbers, spaces, +, -, (, )
+    const phoneRegex = /^[0-9+\-\s()]+$/;
+    return phoneRegex.test(phone) && phone.replace(/[^0-9]/g, '').length >= 9;
+  }
+
+  /**
+   * Validate Libyana phone number (092 or 094 prefixes)
+   */
+  isValidLibyanaPhone(phone: string): boolean {
+    // Remove all non-numeric characters
+    const cleaned = phone.replace(/[^0-9]/g, '');
+
+    // Check if it starts with 092 or 094 and has exactly 10 digits
+    // or starts with 218092 or 218094 (with country code) and has 12 digits
+    const libyanaRegex = /^(092|094)\d{7}$/;
+    const libyanaWithCountryCode = /^218(092|094)\d{7}$/;
+
+    return libyanaRegex.test(cleaned) || libyanaWithCountryCode.test(cleaned);
   }
   
   /**
@@ -260,8 +309,10 @@ export class RegistrationComponent implements OnInit {
     // Prepare data for API
     const registrationData = {
       fullName: this.formData.fullName,
+      preferredCommunicationChannel: this.formData.preferredCommunicationChannel,
       email: this.formData.email,
       phone: this.formData.phone,
+      whatsappNumber: this.formData.whatsappNumber,
       expertise: this.formData.expertise,
       teachingMethods: this.formData.teachingMethods,
       bio: this.formData.bio,
