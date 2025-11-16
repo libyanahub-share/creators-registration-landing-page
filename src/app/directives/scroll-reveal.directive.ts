@@ -17,6 +17,11 @@ export class ScrollRevealDirective implements OnInit, OnDestroy {
     this.el.nativeElement.classList.add('scroll-reveal', `reveal-${this.appScrollReveal}`);
     this.el.nativeElement.style.setProperty('--reveal-delay', `${this.delay}ms`);
 
+    // Adjust rootMargin based on viewport size
+    // On mobile (< 768px), use smaller or no negative margin
+    const isMobile = window.innerWidth < 768;
+    const rootMargin = isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px';
+
     // Create intersection observer
     this.observer = new IntersectionObserver(
       (entries) => {
@@ -27,8 +32,8 @@ export class ScrollRevealDirective implements OnInit, OnDestroy {
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.05,
+        rootMargin: rootMargin
       }
     );
 
