@@ -10,7 +10,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://libyanahub.ly/api',
+  apiUrl: 'https://api.libyanahub.ly/api',
   apiEndpoints: {
     generateCode: '/generate-code',
     verifyCode: '/verify-code',
