@@ -173,34 +173,35 @@ export class RegistrationComponent implements OnInit {
    * Validate current step
    */
   validateCurrentStep(): boolean {
-    switch (this.currentStep) {
-      case 1:
-        // Full name and channel selection are required
-        if (this.formData.fullName.trim() === '' || this.formData.preferredCommunicationChannel === '') {
-          return false;
-        }
+    // switch (this.currentStep) {
+    //   case 1:
+    //     // Full name and channel selection are required
+    //     if (this.formData.fullName.trim() === '' || this.formData.preferredCommunicationChannel === '') {
+    //       return false;
+    //     }
 
-        // Validate based on selected channel
-        switch (this.formData.preferredCommunicationChannel) {
-          case 'email':
-            return this.formData.email.trim() !== '' && this.isValidEmail(this.formData.email);
-          case 'sms':
-            return this.formData.phone.trim() !== '' && this.isValidLibyanaPhone(this.formData.phone);
-          case 'whatsapp':
-            return this.formData.whatsappNumber.trim() !== '' && this.isValidPhone(this.formData.whatsappNumber);
-          default:
-            return false;
-        }
-      case 2:
-        return this.formData.expertise.length > 0 &&
-               this.formData.teachingMethods.length > 0;
-      case 3:
-        return this.formData.introVideo !== null || this.formData.introVideoUrl !== '';
-      case 4:
-        return true;
-      default:
-        return false;
-    }
+    //     // Validate based on selected channel
+    //     switch (this.formData.preferredCommunicationChannel) {
+    //       case 'email':
+    //         return this.formData.email.trim() !== '' && this.isValidEmail(this.formData.email);
+    //       case 'sms':
+    //         return this.formData.phone.trim() !== '' && this.isValidLibyanaPhone(this.formData.phone);
+    //       case 'whatsapp':
+    //         return this.formData.whatsappNumber.trim() !== '' && this.isValidPhone(this.formData.whatsappNumber);
+    //       default:
+    //         return false;
+    //     }
+    //   case 2:
+    //     return this.formData.expertise.length > 0 &&
+    //            this.formData.teachingMethods.length > 0;
+    //   case 3:
+    //     return this.formData.introVideo !== null || this.formData.introVideoUrl !== '';
+    //   case 4:
+    //     return true;
+    //   default:
+    //     return false;
+    // }
+    return true;
   }
 
   /**
