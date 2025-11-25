@@ -17,8 +17,25 @@
       <div class="tab-section">
         <div class="tab-grid">
           <div class="tab-spacer" *ngIf="!isMobile"></div>
-          <div class="tab-content-wrapper">
-            <!-- Tab Navigation -->
+          <div class="tab-content-wrapper" #tabContentWrapper>
+            <!-- Mobile Carousel Navigation -->
+            <div class="mobile-category-carousel">
+              <div class="swiper-container" #swiperContainer>
+                <div class="swiper-wrapper">
+                  <div
+                    *ngFor="let category of categories"
+                    class="swiper-slide"
+                    (click)="changeTab(category.id)">
+                    <div class="category-card">
+                      <span class="category-name">{{ t(category.key) }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+
+            <!-- Desktop Tab Navigation -->
             <div class="tabs">
               <button
                 class="tab-label"
@@ -38,10 +55,35 @@
                 (click)="changeTab(2)">
                 {{ t('featureTab3') }}
               </button>
+              <button
+                class="tab-label"
+                [class.selected]="selectedTab === 3"
+                (click)="changeTab(3)">
+                {{ t('featureTab4') }}
+              </button>
+              <button
+                class="tab-label"
+                [class.selected]="selectedTab === 4"
+                (click)="changeTab(4)">
+                {{ t('featureTab5') }}
+              </button>
+              <button
+                class="tab-label"
+                [class.selected]="selectedTab === 5"
+                (click)="changeTab(5)">
+                {{ t('featureTab6') }}
+              </button>
+              <button
+                class="tab-label"
+                [class.selected]="selectedTab === 6"
+                (click)="changeTab(6)">
+                {{ t('featureTab7') }}
+              </button>
             </div>
 
             <!-- Tab Content -->
             <div class="tab-panel">
+              <!-- Tab 1: Video Courses -->
               <div *ngIf="selectedTab === 0" class="tab-content">
                 <p class="subtitle text-center">
                   {{ t('featureTab1Text') }}
@@ -53,6 +95,7 @@
                 </div>
               </div>
 
+              <!-- Tab 2: Live Sessions -->
               <div *ngIf="selectedTab === 1" class="tab-content">
                 <p class="subtitle text-center">
                   {{ t('featureTab2Text') }}
@@ -64,6 +107,7 @@
                 </div>
               </div>
 
+              <!-- Tab 3: Fitness Coaching -->
               <div *ngIf="selectedTab === 2" class="tab-content">
                 <p class="subtitle text-center">
                   {{ t('featureTab3Text') }}
@@ -71,6 +115,54 @@
                 <div class="illustration-center">
                   <figure class="figure screen-figure">
                     <img src="/assets/course-interface.png" alt="{{ t('featureTab3') }}" />
+                  </figure>
+                </div>
+              </div>
+
+              <!-- Tab 4: Cooking Classes -->
+              <div *ngIf="selectedTab === 3" class="tab-content">
+                <p class="subtitle text-center">
+                  {{ t('featureTab4Text') }}
+                </p>
+                <div class="illustration-center">
+                  <figure class="figure screen-figure">
+                    <img src="/assets/course-interface.png" alt="{{ t('featureTab4') }}" />
+                  </figure>
+                </div>
+              </div>
+
+              <!-- Tab 5: Interactive Courses -->
+              <div *ngIf="selectedTab === 4" class="tab-content">
+                <p class="subtitle text-center">
+                  {{ t('featureTab5Text') }}
+                </p>
+                <div class="illustration-center">
+                  <figure class="figure screen-figure">
+                    <img src="/assets/course-interface.png" alt="{{ t('featureTab5') }}" />
+                  </figure>
+                </div>
+              </div>
+
+              <!-- Tab 6: Health Consultations -->
+              <div *ngIf="selectedTab === 5" class="tab-content">
+                <p class="subtitle text-center">
+                  {{ t('featureTab6Text') }}
+                </p>
+                <div class="illustration-center">
+                  <figure class="figure screen-figure">
+                    <img src="/assets/course-interface.png" alt="{{ t('featureTab6') }}" />
+                  </figure>
+                </div>
+              </div>
+
+              <!-- Tab 7: Career Coaching -->
+              <div *ngIf="selectedTab === 6" class="tab-content">
+                <p class="subtitle text-center">
+                  {{ t('featureTab7Text') }}
+                </p>
+                <div class="illustration-center">
+                  <figure class="figure screen-figure">
+                    <img src="/assets/course-interface.png" alt="{{ t('featureTab7') }}" />
                   </figure>
                 </div>
               </div>

@@ -1,6 +1,15 @@
+@use 'swiper/css';
+@use 'swiper/css/navigation';
+@use 'swiper/css/pagination';
+@use 'swiper/css/effect-coverflow';
+
 .feature-root {
   position: relative;
   padding: 8rem 0;
+
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+  }
 
   .decoration {
     position: absolute;
@@ -35,6 +44,10 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+
+    @media (max-width: 768px) {
+      padding: 0 1rem;
+    }
 
     &.desktop {
       max-width: 1280px;
@@ -135,7 +148,12 @@
     }
 
     @media (max-width: 768px) {
-      font-size: 2rem;
+      font-size: 1.75rem;
+      margin: 0 0 1rem 0;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.5rem;
     }
   }
 
@@ -144,6 +162,15 @@
     color: #6b7280;
     line-height: 1.8;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.95rem;
+    }
   }
 
   .btn-primary {
@@ -231,6 +258,10 @@
   // Tab Styles
   .tab-section {
     margin-top: 3rem;
+
+    @media (max-width: 768px) {
+      margin-top: 2rem;
+    }
   }
 
   .tab-grid {
@@ -249,13 +280,167 @@
 
   .tab-content-wrapper {
     width: 100%;
+    position: relative;
+    touch-action: pan-y;
+    user-select: none;
+
+    @media (max-width: 768px) {
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+  }
+
+  // Mobile Category Carousel
+  .mobile-category-carousel {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    padding: 0.25rem 0 1rem;
+    overflow: hidden;
+
+    // Hide on desktop
+    @media (min-width: 768px) {
+      display: none;
+    }
+
+    .swiper-container {
+      width: 100%;
+      padding: 12px 0;
+      overflow: visible;
+      margin: 0 auto;
+    }
+
+    .swiper-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .swiper-slide {
+      width: 55%;
+      height: auto;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @media (max-width: 480px) {
+        width: 58%;
+      }
+
+      .category-card {
+        background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+        color: #ffffff;
+        padding: 0.5rem 0.875rem;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 3px 10px rgba(156, 39, 176, 0.2);
+        width: 100%;
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 480px) {
+          padding: 0.5rem 0.675rem;
+          min-height: 38px;
+        }
+
+        .category-name {
+          font-size: 0.775rem;
+          font-weight: 600;
+          line-height: 1.2;
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
+
+          @media (max-width: 480px) {
+            font-size: 0.725rem;
+          }
+        }
+      }
+
+      // Non-active slides (side slides)
+      &:not(.swiper-slide-active) {
+        .category-card {
+          opacity: 0.3;
+          transform: scale(0.90);
+          box-shadow: 0 2px 8px rgba(156, 39, 176, 0.12);
+          background: linear-gradient(135deg, #ce93d8 0%, #ba68c8 100%);
+        }
+      }
+
+      // Active slide (center)
+      &.swiper-slide-active {
+        .category-card {
+          opacity: 1;
+          transform: scale(1);
+          box-shadow: 0 6px 16px rgba(156, 39, 176, 0.3);
+        }
+      }
+    }
+
+    // Pagination dots
+    .swiper-pagination {
+      position: relative;
+      bottom: 0;
+      margin-top: 0.75rem;
+
+      ::ng-deep .swiper-pagination-bullet {
+        width: 6px;
+        height: 6px;
+        background: #d1d5db;
+        opacity: 1;
+        margin: 0 3px;
+        transition: all 0.3s ease;
+
+        &.swiper-pagination-bullet-active {
+          background: #9c27b0;
+          width: 18px;
+          border-radius: 3px;
+        }
+
+        &.swiper-pagination-bullet-active-main {
+          background: #9c27b0;
+        }
+
+        &.swiper-pagination-bullet-active-prev,
+        &.swiper-pagination-bullet-active-next {
+          background: #ba68c8;
+        }
+      }
+    }
   }
 
   .tabs {
-    display: flex;
+    display: none; // Hidden on mobile by default
     justify-content: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     margin-bottom: 2rem;
+    gap: 0.5rem;
+    position: relative;
+
+    // Show on desktop/tablet
+    @media (min-width: 768px) {
+      display: flex;
+    }
+
+    // Tablet: Wrap tabs if needed (768px - 1200px)
+    @media (min-width: 768px) and (max-width: 1200px) {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.25rem;
+    }
   }
 
   .tab-label {
@@ -268,10 +453,13 @@
     border-bottom: 2px solid transparent;
     transition: all 0.3s ease;
     font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
 
-    @media (max-width: 600px) {
-      font-size: 0.875rem;
-      padding: 0.75rem 1rem;
+    // Tablets (768px - 1200px): smaller text and padding
+    @media (min-width: 768px) and (max-width: 1200px) {
+      font-size: 0.95rem;
+      padding: 0.875rem 1.25rem;
     }
 
     &:hover {
@@ -281,12 +469,17 @@
     &.selected {
       color: #9c27b0;
       border-bottom-color: #9c27b0;
+      font-weight: 600;
     }
   }
 
   .tab-panel {
     position: relative;
-    padding-top:0 !important;
+    padding-top: 0 !important;
+
+    @media (max-width: 767px) {
+      padding: 0;
+    }
 
     @media (min-width: 768px) {
       padding: 1rem 2rem 0;
@@ -316,6 +509,21 @@
     img {
       width: 90%;
       display: block;
+    }
+
+    @media (max-width: 768px) {
+      img {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  // Better mobile spacing for figures
+  .figure {
+    @media (max-width: 768px) {
+      margin: 1rem auto;
+      padding: 0.5rem;
     }
   }
 
