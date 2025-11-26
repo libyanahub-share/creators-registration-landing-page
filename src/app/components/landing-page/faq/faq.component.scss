@@ -106,7 +106,21 @@ $border-radius-medium: 12px;
     }
 
     .accordion-summary {
+      // Reset button styles
+      appearance: none;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: inherit;
+      font: inherit;
+
+      // Touch and interaction
       cursor: pointer;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+
       min-height: 48px;
       transition: all 0.3s ease;
 

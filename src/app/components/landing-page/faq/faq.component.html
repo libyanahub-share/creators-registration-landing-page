@@ -22,7 +22,7 @@
           @for (item of faqs; track $index) {
             <div class="item" appScrollReveal="fade-left" [delay]="$index * 100">
               <div class="paper" [class.expanded]="isExpanded($index)">
-                <div class="accordion-summary" (click)="handleChange($index)">
+                <button type="button" class="accordion-summary" (click)="handleChange($index)">
                   <div class="content" [class.expanded]="isExpanded($index)">
                     <h3 class="heading">{{ item.q }}</h3>
                     <svg
@@ -40,7 +40,7 @@
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </div>
-                </div>
+                </button>
                 <div class="accordion-details" [class.expanded]="isExpanded($index)">
                   <div class="detail">
                     <p>{{ item.a }}</p>

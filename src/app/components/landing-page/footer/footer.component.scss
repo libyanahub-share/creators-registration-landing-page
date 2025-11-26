@@ -17,14 +17,15 @@
     position: absolute;
     z-index: 10;
     transform: rotate(180deg);
+    pointer-events: none;
   }
 
 
 
   @media (max-width: 1279px) {
       padding-top: 140px;
-    
-    
+
+
       &::before {
         background: url('/assets/deco-wave-light.png') top left no-repeat;
         background-size: 100% auto;
@@ -36,8 +37,9 @@
         position: absolute;
         z-index: 10;
         transform: rotate(180deg);
+        pointer-events: none;
       }
-    
+
   }
 
   @media (max-width: 599px) {
@@ -53,8 +55,8 @@
         position: absolute;
         z-index: 10;
         transform: rotate(180deg);
+        pointer-events: none;
       }
-    
 
    }
 
