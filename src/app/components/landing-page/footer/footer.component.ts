@@ -26,8 +26,8 @@ export class FooterComponent {
 
   socialLinks = [
     { icon: 'fab fa-facebook-f', label: 'فيسبوك', link: '#' },
-    { icon: 'fab fa-twitter', label: 'تويتر', link: '#' },
+    // { icon: 'fab fa-twitter', label: 'تويتر', link: '#' },
     { icon: 'fab fa-instagram', label: 'انستقرام', link: '#' },
-    { icon: 'fab fa-linkedin-in', label: 'لينكدإن', link: '#' }
+    { icon: 'fab fa-tiktok', label: 'تك توك', link: '#' },
   ];
 }
