@@ -82,7 +82,7 @@
           </div>
           <span class="text-xs text-center text-muted-foreground hidden md:block">
             <span *ngIf="step === 1">معلومات شخصية</span>
-            <span *ngIf="step === 2">معلومات التدريس</span>
+            <span *ngIf="step === 2">المعلومات المهنية</span>
             <span *ngIf="step === 3">فيديو التعريف</span>
             <span *ngIf="step === 4">مراجعة وإرسال</span>
           </span>
@@ -223,7 +223,8 @@
                           'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
                           'border-border focus:border-border focus:ring-1 focus:ring-border') +
                          ' focus:outline-none'"
-                placeholder="092-1234567 أو 094-1234567">
+                placeholder="0921234567"
+                style="direction: rtl; unicode-bidi: plaintext;">
               <p *ngIf="formData.preferredCommunicationChannel === 'sms'"
                  class="text-xs text-muted-foreground text-right mt-1">
                 يجب أن يكون الرقم من ليبيانا (092 أو 094)
@@ -250,7 +251,8 @@
                           'border-primary/50 bg-primary/5 focus:border-primary focus:ring-2 focus:ring-primary' :
                           'border-border focus:border-border focus:ring-1 focus:ring-border') +
                          ' focus:outline-none'"
-                placeholder="+218912345678">
+                placeholder="+218912345678"
+                style="direction: rtl; unicode-bidi: plaintext;">
               <p *ngIf="formData.preferredCommunicationChannel === 'whatsapp' && formData.whatsappNumber && !isValidPhone(formData.whatsappNumber)"
                  class="text-sm text-red-500 text-right mt-1">
                 الرجاء إدخال رقم واتساب صحيح (على الأقل 9 أرقام)
@@ -259,30 +261,12 @@
           </div>
         </div>
         
-        <!-- Step 2: Teaching Information -->
+        <!-- Step 2: Professional Information -->
         <div *ngIf="currentStep === 2" class="space-y-6 animate-fade-in-up">
           <h2 class="text-2xl font-bold text-foreground text-right mb-6">
-            معلومات التدريس
+            المعلومات المهنية
           </h2>
-          
-          <div>
-            <label class="block text-right text-sm font-medium text-foreground mb-3">
-              طرق التدريس المفضلة <span class="text-red-500">*</span> (اختر واحد أو أكثر)
-            </label>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <button
-                *ngFor="let method of teachingMethodsList"
-                type="button"
-                (click)="toggleTeachingMethod(method)"
-                class="px-4 py-3 rounded-xl font-medium transition-all text-sm text-right"
-                [class]="formData.teachingMethods.includes(method) 
-                  ? 'gradient-primary text-white' 
-                  : 'bg-muted text-foreground hover:bg-muted/70'">
-                {{ method }}
-              </button>
-            </div>
-          </div>
-          
+
           <div>
             <label class="block text-right text-sm font-medium text-foreground mb-3">
               مجالات الخبرة <span class="text-red-500">*</span> (اختر واحد أو أكثر)
@@ -293,14 +277,14 @@
                 type="button"
                 (click)="toggleExpertise(expertise)"
                 class="px-4 py-2 rounded-xl font-medium transition-all text-sm"
-                [class]="formData.expertise.includes(expertise) 
-                  ? 'gradient-primary text-white' 
+                [class]="formData.expertise.includes(expertise)
+                  ? 'gradient-primary text-white'
                   : 'bg-muted text-foreground hover:bg-muted/70'">
                 {{ expertise }}
               </button>
             </div>
           </div>
-          
+
           <div>
             <label class="block text-right text-sm font-medium text-foreground mb-2">
               نبذة تعريفية موجزة
@@ -388,8 +372,8 @@
           <div class="space-y-4">
             <!-- Personal Info Review -->
             <div class="bg-muted/30 rounded-xl p-6">
-              <div class="flex justify-between items-center mb-4">
-                <button 
+              <div class="flex flex-row-reverse justify-between items-center mb-4">
+                <button
                   type="button"
                   (click)="goToStep(1)"
                   class="text-primary hover:text-primary/80 text-sm font-medium">
@@ -401,27 +385,27 @@
               </div>
               <div class="space-y-2 text-right">
                 <p><strong>الاسم:</strong> {{ formData.fullName }}</p>
-                <p><strong>البريد الإلكتروني:</strong> {{ formData.email }}</p>
-                <p><strong>الهاتف:</strong> {{ formData.phone }}</p>
+                <p *ngIf="formData.email"><strong>البريد الإلكتروني:</strong> {{ formData.email }}</p>
+                <p *ngIf="formData.phone"><strong>الهاتف:</strong> <span dir="ltr">{{ formData.phone }}</span></p>
+                <p *ngIf="formData.whatsappNumber"><strong>واتساب:</strong> <span dir="ltr">{{ formData.whatsappNumber }}</span></p>
               </div>
             </div>
-            
-            <!-- Teaching Info Review -->
+
+            <!-- Professional Info Review -->
             <div class="bg-muted/30 rounded-xl p-6">
-              <div class="flex justify-between items-center mb-4">
-                <button 
+              <div class="flex flex-row-reverse justify-between items-center mb-4">
+                <button
                   type="button"
                   (click)="goToStep(2)"
                   class="text-primary hover:text-primary/80 text-sm font-medium">
                   تعديل
                 </button>
                 <h3 class="text-lg font-bold text-foreground">
-                  معلومات التدريس
+                  المعلومات المهنية
                 </h3>
               </div>
               <div class="space-y-2 text-right">
                 <p><strong>مجالات الخبرة:</strong> {{ formData.expertise.join('، ') }}</p>
-                <p><strong>طرق التدريس:</strong> {{ formData.teachingMethods.join('، ') }}</p>
                 <div>
                   <p class="mb-2"><strong>النبذة التعريفية:</strong></p>
                   <textarea
@@ -436,11 +420,11 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Video Review -->
             <div class="bg-muted/30 rounded-xl p-6">
-              <div class="flex justify-between items-center mb-4">
-                <button 
+              <div class="flex flex-row-reverse justify-between items-center mb-4">
+                <button
                   type="button"
                   (click)="goToStep(3)"
                   class="text-primary hover:text-primary/80 text-sm font-medium">

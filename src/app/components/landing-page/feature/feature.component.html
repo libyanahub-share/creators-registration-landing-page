@@ -73,12 +73,6 @@
                 (click)="changeTab(5)">
                 {{ t('featureTab6') }}
               </button>
-              <button
-                class="tab-label"
-                [class.selected]="selectedTab === 6"
-                (click)="changeTab(6)">
-                {{ t('featureTab7') }}
-              </button>
             </div>
 
             <!-- Tab Content -->
@@ -151,18 +145,6 @@
                 <div class="illustration-center">
                   <figure class="figure screen-figure">
                     <img src="/assets/course-interface.png" alt="{{ t('featureTab6') }}" />
-                  </figure>
-                </div>
-              </div>
-
-              <!-- Tab 7: Career Coaching -->
-              <div *ngIf="selectedTab === 6" class="tab-content">
-                <p class="subtitle text-center">
-                  {{ t('featureTab7Text') }}
-                </p>
-                <div class="illustration-center">
-                  <figure class="figure screen-figure">
-                    <img src="/assets/course-interface.png" alt="{{ t('featureTab7') }}" />
                   </figure>
                 </div>
               </div>

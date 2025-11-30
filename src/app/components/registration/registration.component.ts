@@ -59,15 +59,20 @@ export class RegistrationComponent implements OnInit {
     'فنون إبداعية',
     'تعليم لغات'
   ];
-  
+
   // Expertise suggestions
   expertiseSuggestions = [
     'برمجة',
+    'تطوير الويب',
     'تصميم',
     'تسويق',
+    'أمن سيبراني',
     'كتابة',
     'ترجمة',
     'محاسبة',
+    'موارد بشرية',
+    'علاقات عامة',
+    'إدارة مخازن',
     'قانون',
     'طب',
     'هندسة',
@@ -75,7 +80,10 @@ export class RegistrationComponent implements OnInit {
     'طبخ',
     'رياضة',
     'فنون',
-    'موسيقى',
+    'تصوير',
+    'إدارة أعمال',
+    'إدارة مشاريع',
+    'تحليل بيانات',
     'أخرى'
   ];
   
@@ -192,8 +200,7 @@ export class RegistrationComponent implements OnInit {
             return false;
         }
       case 2:
-        return this.formData.expertise.length > 0 &&
-               this.formData.teachingMethods.length > 0;
+        return this.formData.expertise.length > 0;
       case 3:
         return this.formData.introVideo !== null || this.formData.introVideoUrl !== '';
       case 4:

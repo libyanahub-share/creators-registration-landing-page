@@ -25,9 +25,8 @@ export class FooterComponent {
   };
 
   socialLinks = [
-    { icon: 'fab fa-facebook-f', label: 'فيسبوك', link: '#' },
-    // { icon: 'fab fa-twitter', label: 'تويتر', link: '#' },
-    { icon: 'fab fa-instagram', label: 'انستقرام', link: '#' },
-    { icon: 'fab fa-tiktok', label: 'تك توك', link: '#' },
+    { icon: 'fab fa-facebook-f', label: 'فيسبوك', link: 'https://www.facebook.com/share/1D5YRniVsT/' },
+    { icon: 'fab fa-instagram', label: 'انستقرام', link: 'https://www.instagram.com/libyanamobilephoneofficial?igsh=Z2Nma3A3dGM2ZHNh' },
+    { icon: 'fab fa-tiktok', label: 'تك توك', link: 'https://www.tiktok.com/@libyanaofficial?_r=1&_t=ZM-91ids8PIbxk' },
   ];
 }

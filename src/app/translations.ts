@@ -12,8 +12,8 @@ export const translations = {
   heroTitle: { en: 'Join LibyanaHub', ar: 'انضم إلى ليبيانا هب' },
   heroTitleBold: { en: 'Share Your Expertise', ar: 'شارك خبراتك' },
   heroSubtitle: {
-    en: 'Join Libya\'s leading digital services platform. Share your knowledge and skills across 7 categories: Video Courses, Live Sessions, Fitness Coaching, Cooking Classes, Interactive Courses, Health Consultations, and Career Coaching.',
-    ar: 'انضم إلى منصة ليبيا الرائدة للخدمات الرقمية. شارك معرفتك ومهاراتك عبر 7 فئات: الدورات التعليمية، الجلسات المباشرة، التدريب الرياضي، دروس الطبخ، الدورات التفاعلية، الاستشارات الصحية، والتطوير المهني.'
+    en: 'Join Libya\'s leading digital services platform. Share your knowledge and skills across 6 categories: Video Courses, Live Sessions, Fitness Coaching, Cooking Classes, Interactive Courses, and Health Consultations.',
+    ar: 'انضم إلى منصة ليبيا الرائدة للخدمات الرقمية. شارك معرفتك ومهاراتك عبر 6 فئات: الدورات التعليمية، الجلسات المباشرة، التدريب الرياضي، دروس الطبخ، الدورات التفاعلية، والاستشارات الصحية.'
   },
   heroWatchVideo: { en: 'WATCH VIDEO', ar: 'شاهد الفيديو' },
   heroGetStarted: { en: 'REGISTER NOW', ar: 'سجّل الآن' },
@@ -22,7 +22,7 @@ export const translations = {
 
   // Feature Section
   featureTitle: { en: 'Platform Categories', ar: 'فئات المنصة' },
-  featureTitleBold: { en: '7 Service Categories', ar: '7 فئات خدمية' },
+  featureTitleBold: { en: '6 Service Categories', ar: '6 فئات خدمية' },
 
   // Category 1: Video Courses
   featureTab1: { en: 'Video Courses', ar: 'الدورات التعليمية' },

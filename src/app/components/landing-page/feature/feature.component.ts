@@ -54,8 +54,7 @@ export class FeatureComponent implements OnInit, AfterViewInit {
     { id: 2, key: 'featureTab3' },
     { id: 3, key: 'featureTab4' },
     { id: 4, key: 'featureTab5' },
-    { id: 5, key: 'featureTab6' },
-    { id: 6, key: 'featureTab7' }
+    { id: 5, key: 'featureTab6' }
   ];
 
   // Animation states

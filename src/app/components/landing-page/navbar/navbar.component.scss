@@ -162,6 +162,18 @@
     transition: all 0.3s ease;
   }
 
+  .logo-image {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    transition: all 0.3s ease-out;
+
+    &.shrink-on-fixed {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
   .logo-icon {
     width: 64px;
     height: 64px;
