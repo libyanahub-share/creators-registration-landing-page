@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { translations } from '../../../translations';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,10 @@ export class NavbarComponent implements OnInit {
   isFixed = false;
   translations = translations;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     // Set Arabic and RTL permanently
@@ -40,5 +44,10 @@ export class NavbarComponent implements OnInit {
 
   navigateToRegister(): void {
     this.router.navigate(['/register']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/auth']);
   }
 }

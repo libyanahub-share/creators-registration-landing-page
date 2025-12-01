@@ -313,6 +313,29 @@ button {
   }
 }
 
+.btn-logout {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  direction: ltr;
+
+  svg {
+    display: block;
+    transform: scaleX(-1);
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+}
+
 // Settings Menu
 .settings-wrapper {
   position: relative;
