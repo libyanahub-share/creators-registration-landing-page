@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../../services/registration.service';
 import { IndexedDbService } from '../../services/indexed-db.service';
+import { AuthService } from '../../services/auth.service';
 
 export interface RegistrationData {
   // Step 1: Personal Info
@@ -96,7 +97,8 @@ export class RegistrationComponent implements OnInit {
   constructor(
     public router: Router,
     private registrationService: RegistrationService,
-    private indexedDbService: IndexedDbService
+    private indexedDbService: IndexedDbService,
+    private authService: AuthService
   ) {}
   
   ngOnInit(): void {
@@ -425,6 +427,15 @@ export class RegistrationComponent implements OnInit {
         this.errorMessage = error.message || 'حدث خطأ أثناء إرسال البيانات، الرجاء المحاولة مرة أخرى';
         this.scrollToTop();
         console.error('Registration error:', error);
+
+        // Auto-logout if code is already used or session expired
+        if (this.errorMessage.includes('الكود') || this.errorMessage.includes('الجلسة')) {
+          this.authService.logout();
+          // Redirect to auth page after a short delay to show the error
+          setTimeout(() => {
+            this.router.navigate(['/auth']);
+          }, 2000);
+        }
       }
     });
   }

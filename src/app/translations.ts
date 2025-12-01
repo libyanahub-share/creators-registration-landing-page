@@ -27,8 +27,8 @@ export const translations = {
   // Category 1: Video Courses
   featureTab1: { en: 'Video Courses', ar: 'الدورات التعليمية' },
   featureTab1Text: {
-    en: 'Create pre-recorded video courses. Students watch at their own pace with lifetime access. Perfect for teaching skills like business, technology, marketing, design, languages, and personal development.',
-    ar: 'أنشئ دورات فيديو مسجلة مسبقاً. يشاهدها الطلاب بالوقت المناسب لهم مع وصول مدى الحياة. مثالية لتعليم مهارات الأعمال، التكنولوجيا، التسويق، التصميم، اللغات، والتطوير الشخصي.'
+    en: 'Create pre-recorded video courses. Students watch at their own pace anytime. Perfect for teaching skills like business, technology, marketing, design, languages, and personal development.',
+    ar: 'أنشئ دورات فيديو مسجلة مسبقاً. يشاهدها الطلاب بالوقت المناسب لهم. مثالية لتعليم مهارات الأعمال، التكنولوجيا، التسويق، التصميم، اللغات، والتطوير الشخصي.'
   },
 
   // Category 2: Live Sessions

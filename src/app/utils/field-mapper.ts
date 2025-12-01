@@ -22,11 +22,16 @@ export const TEACHING_METHODS_MAP: { [key: string]: string } = {
  */
 export const EXPERTISE_MAP: { [key: string]: string } = {
   'برمجة': 'programming',
+  'تطوير الويب': 'web_development',
   'تصميم': 'design',
   'تسويق': 'marketing',
+  'أمن سيبراني': 'cybersecurity',
   'كتابة': 'writing',
   'ترجمة': 'translation',
   'محاسبة': 'accounting',
+  'موارد بشرية': 'human_resources',
+  'علاقات عامة': 'public_relations',
+  'إدارة مخازن': 'inventory_management',
   'قانون': 'law',
   'طب': 'medicine',
   'هندسة': 'engineering',
@@ -34,7 +39,10 @@ export const EXPERTISE_MAP: { [key: string]: string } = {
   'طبخ': 'cooking',
   'رياضة': 'sports',
   'فنون': 'arts',
-  'موسيقى': 'music',
+  'تصوير': 'photography',
+  'إدارة أعمال': 'business_management',
+  'إدارة مشاريع': 'project_management',
+  'تحليل بيانات': 'data_analysis',
   'أخرى': 'other'
 };
 
@@ -91,7 +99,7 @@ export function mapRegistrationData(frontendData: FrontendRegistrationData): Bac
     whatsapp_number: frontendData.whatsappNumber || '',
     expertise: mapExpertise(frontendData.expertise),
     teaching_methods: mapTeachingMethods(frontendData.teachingMethods),
-    bio: frontendData.bio,
+    bio: frontendData.bio || '',
   };
 
   // Add video if exists
