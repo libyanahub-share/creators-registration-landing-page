@@ -131,35 +131,3 @@ video {
   object-fit: contain;
   background: #000;
 }
-
-/* ========================================
-   Accordion Styles
-   ======================================== */
-
-.accordion-item {
-  background: hsl(var(--background));
-}
-
-.accordion-item:hover {
-  border-color: hsl(var(--primary) / 0.5);
-}
-
-.accordion-content {
-  animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Chevron rotation */
-.accordion-item button svg.rotate-180 {
-  transform: rotate(180deg);
-}

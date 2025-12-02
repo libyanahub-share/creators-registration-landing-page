@@ -573,71 +573,131 @@
         </p>
       </div>
 
-      <!-- Guide Header -->
-      <div class="text-center mb-6 pb-4 border-b border-border">
-        <h3 class="text-lg font-bold text-foreground mb-2">نصائح لتصوير فيديو احترافي</h3>
-        <p class="text-muted-foreground text-sm">اتبع هذه الخطوات البسيطة للحصول على فيديو رائع</p>
-      </div>
+      <!-- Checklist -->
+      <div class="bg-muted/30 rounded-xl p-5" dir="rtl">
+        <h3 class="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          <span>قائمة التحقق قبل التسجيل</span>
+        </h3>
 
-      <!-- Accordion Steps -->
-      <div class="space-y-3">
-        <div
-          *ngFor="let step of videoGuideSteps; let i = index"
-          class="accordion-item border border-border rounded-xl overflow-hidden transition-all"
-          [class.border-primary]="expandedAccordionStep === i">
-
-          <!-- Accordion Header -->
-          <button
-            type="button"
-            (click)="toggleAccordionStep(i)"
-            class="w-full flex items-center gap-3 p-4 text-right hover:bg-muted/50 transition-colors">
-            <svg
-              class="w-5 h-5 text-muted-foreground transition-transform flex-shrink-0"
-              [class.rotate-180]="expandedAccordionStep === i"
-              fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-            <span class="flex-1 font-bold text-foreground">{{ step.title }}</span>
-            <span class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
-              <span *ngIf="i < 6">{{ i + 1 }}</span>
-              <svg *ngIf="i === 6" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+        <!-- Camera Section -->
+        <div class="mb-4">
+          <h4 class="text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+            <span class="text-base">📷</span>
+            <span>الكاميرا</span>
+          </h4>
+          <ul class="space-y-2 mr-6">
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
               </svg>
-            </span>
-          </button>
+              <span>الهاتف في الوضع الأفقي (Landscape)</span>
+            </li>
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>الكاميرا في مستوى العين وثابتة</span>
+            </li>
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>المسافة: 2-3 أقدام (طول ذراع) - يظهر الرأس والكتفين</span>
+            </li>
+          </ul>
+        </div>
 
-          <!-- Accordion Content -->
-          <div
-            *ngIf="expandedAccordionStep === i"
-            class="accordion-content px-4 pb-4">
+        <!-- Lighting Section -->
+        <div class="mb-4">
+          <h4 class="text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+            <span class="text-base">💡</span>
+            <span>الإضاءة</span>
+          </h4>
+          <ul class="space-y-2 mr-6">
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>مصدر الضوء أمامك (نافذة أو مصباح)</span>
+            </li>
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>تجنب الإضاءة الخلفية (لا تجعل النافذة خلفك)</span>
+            </li>
+          </ul>
+        </div>
 
-            <p class="text-foreground mb-4 pr-11">{{ step.content }}</p>
+        <!-- Background Section -->
+        <div class="mb-4">
+          <h4 class="text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+            <span class="text-base">🎨</span>
+            <span>الخلفية</span>
+          </h4>
+          <ul class="space-y-2 mr-6">
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>خلفية نظيفة وبسيطة بدون فوضى</span>
+            </li>
+          </ul>
+        </div>
 
-            <!-- Checklist Items -->
-            <ul class="space-y-2 mb-4 pr-11">
-              <li
-                *ngFor="let item of step.items"
-                class="flex items-start gap-2 text-muted-foreground">
-                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span>{{ item }}</span>
-              </li>
-            </ul>
+        <!-- Audio Section -->
+        <div class="mb-4">
+          <h4 class="text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+            <span class="text-base">🎤</span>
+            <span>الصوت</span>
+          </h4>
+          <ul class="space-y-2 mr-6">
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>مكان هادئ (أغلق النوافذ، أوقف المراوح)</span>
+            </li>
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>تحدث بصوت واضح</span>
+            </li>
+          </ul>
+        </div>
 
-            <!-- Tip/Warning Box -->
-            <div
-              class="p-4 rounded-lg mr-11"
-              [class]="step.tipType === 'warning' ? 'bg-red-50 border-r-4 border-red-400' : 'bg-amber-50 border-r-4 border-amber-400'">
-              <p class="font-bold mb-1"
-                 [class]="step.tipType === 'warning' ? 'text-red-700' : 'text-amber-700'">
-                {{ step.tipType === 'warning' ? 'تحذير:' : 'نصيحة مهمة:' }}
-              </p>
-              <p [class]="step.tipType === 'warning' ? 'text-red-600' : 'text-amber-600'">
-                {{ step.tip }}
-              </p>
-            </div>
-          </div>
+        <!-- Before Recording Section -->
+        <div class="mb-4">
+          <h4 class="text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+            <span class="text-base">🎬</span>
+            <span>قبل التسجيل</span>
+          </h4>
+          <ul class="space-y-2 mr-6">
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>انظر إلى عدسة الكاميرا</span>
+            </li>
+            <li class="flex items-center gap-2 text-muted-foreground text-sm">
+              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>قم بتجربة تسجيل قصيرة أولاً</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tip Box -->
+        <div class="bg-amber-50 border-r-4 border-amber-400 p-3 rounded-lg">
+          <p class="text-amber-700 text-sm">
+            <span class="font-bold">💡 نصيحة:</span>
+            ابتسم وكن طبيعياً! الثقة والأصالة أهم من الكمال.
+          </p>
         </div>
       </div>
     </div>
