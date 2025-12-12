@@ -13,7 +13,7 @@ export const translations = {
   heroTitleBold: { en: 'Share Your Expertise', ar: 'شارك خبراتك' },
   heroSubtitle: {
     en: 'Join Libya\'s leading digital services platform. Share your knowledge and skills across 6 categories: Video Courses, Live Sessions, Fitness Coaching, Cooking Classes, Interactive Courses, and Health Consultations.',
-    ar: 'انضم إلى منصة ليبيا الرائدة للخدمات الرقمية. شارك معرفتك ومهاراتك عبر 6 فئات: الدورات التعليمية، الجلسات المباشرة، التدريب الرياضي، دروس الطبخ، الدورات التفاعلية، والاستشارات الصحية.'
+    ar: 'انضم إلى أول منصة ليبية لمشاركة الخبرات. شارك معرفتك ومهاراتك عبر 6 فئات: الدورات التعليمية، الجلسات المباشرة، التدريب الرياضي، دروس الطبخ، الدورات التفاعلية، والاستشارات الصحية.'
   },
   heroWatchVideo: { en: 'WATCH VIDEO', ar: 'شاهد الفيديو' },
   heroGetStarted: { en: 'REGISTER NOW', ar: 'سجّل الآن' },

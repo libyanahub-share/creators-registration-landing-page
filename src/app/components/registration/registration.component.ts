@@ -85,6 +85,8 @@ export class RegistrationComponent implements OnInit {
     'إدارة أعمال',
     'إدارة مشاريع',
     'تحليل بيانات',
+    'لغات',
+    'تنمية بشرية',
     'أخرى'
   ];
   
@@ -432,13 +434,13 @@ export class RegistrationComponent implements OnInit {
         console.error('Registration error:', error);
 
         // Auto-logout if code is already used or session expired
-        if (this.errorMessage.includes('الكود') || this.errorMessage.includes('الجلسة')) {
-          this.authService.logout();
-          // Redirect to auth page after a short delay to show the error
-          setTimeout(() => {
-            this.router.navigate(['/auth']);
-          }, 2000);
-        }
+        // if (this.errorMessage.includes('الكود') || this.errorMessage.includes('الجلسة')) {
+        //   this.authService.logout();
+        //   // Redirect to auth page after a short delay to show the error
+        //   setTimeout(() => {
+        //     this.router.navigate(['/auth']);
+        //   }, 2000);
+        // }
       }
     });
   }
